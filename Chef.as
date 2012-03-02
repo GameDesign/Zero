@@ -19,7 +19,5 @@ package
 			super.update();
 			// do animations here
 		}
-		
 	}
-
 }

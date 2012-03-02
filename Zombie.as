@@ -6,7 +6,7 @@ package
 	{
 		public var speed:int;
 		
-		public function Zombie() 
+		public function Zombie()
 		{
 			super();
 			//Adds a graphic of a zombie
@@ -23,7 +23,5 @@ package
 			velocity.x = speed;
 			super.update();
 		}
-		
 	}
-
 }

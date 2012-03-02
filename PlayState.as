@@ -30,6 +30,5 @@ package {
 		{
 			FlxG.switchState(new Shop());
 		}
-		
 	}
 }
