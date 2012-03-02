@@ -6,26 +6,29 @@ package {
 		public var chef:Chef;
 		public var zombies:FlxGroup;
 		
-		override public function create():void {
-			
+		override public function create():void
+		{
 			chef = new Chef();
 			zombies = new FlxGroup();
+			
 			for (var i:int = 0; i < 3;i++)
+			{
 				zombies.add(new Zombie());
+			}
 				
 			add(zombies);
 			add(chef);
-			FlxG.log("ASd");
 		}
 		
-		override public function update():void {
+		override public function update():void
+		{
 			super.update();
-			FlxG.collide(zombies, chef, gameOver);	// everything will collide
+			FlxG.collide(zombies, chef, gameOver);
 		}
 		
 		public function gameOver(Object1:FlxObject,Object2:FlxObject):void 
 		{
-			FlxG.resetState();
+			FlxG.switchState(new Shop());
 		}
 		
 	}

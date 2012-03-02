@@ -1,9 +1,11 @@
 package {
 	import org.flixel.*;
 
-	public class MainMenu extends FlxState {
+	public class MainMenu extends FlxState
+	{
 		
-		public function MainMenu() {
+		override public function create():void
+		{
 			var t:FlxText;
 			
 			t = new FlxText(0, FlxG.height/2, FlxG.width, "ZERO");
@@ -22,11 +24,13 @@ package {
 			FlxG.mouse.show();
 		}
 
-		override public function update():void {
+		override public function update():void
+		{
 			// If the mouse was just pressed
 			if (FlxG.mouse.justPressed())
 				// Switch from the main menu to the gameplay
 				FlxG.switchState(new PlayState());
+			super.update();
 		}
 	}
 }

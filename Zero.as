@@ -1,5 +1,3 @@
-//This is nicks comment
-
 package
 {	
 	import org.flixel.FlxGame;
