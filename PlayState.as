@@ -18,6 +18,8 @@ package {
 				
 			add(zombies);
 			add(chef);
+			
+			add(new Tile());
 		}
 		
 		override public function update():void
