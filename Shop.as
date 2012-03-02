@@ -1,4 +1,5 @@
-package {
+package
+{
 	import org.flixel.*;
 	
 	public class Shop extends FlxState
