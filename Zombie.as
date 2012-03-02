@@ -4,13 +4,15 @@ package
 	
 	public class Zombie extends FlxSprite
 	{
+		[Embed(source = "data/zombie.png")] private static var ImgZombie:Class;
+		
 		public var speed:int;
 		
 		public function Zombie()
 		{
 			super();
-			//Adds a graphic of a zombie
-			makeGraphic(32, 64, 0xFF00FF00);
+			// Loads a graphic of a zombie
+			loadGraphic(ImgZombie);
 			//Choose a random speed
 			speed = Math.random() * 50;
 			//Makes the y coordinate of the zombie start at the bottom
