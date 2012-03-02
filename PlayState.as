@@ -15,6 +15,7 @@ package {
 				
 			add(zombies);
 			add(chef);
+			FlxG.log("ASd");
 		}
 		
 		override public function update():void {
