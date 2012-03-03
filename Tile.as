@@ -11,15 +11,27 @@ package
 		[Embed(source = "data/heart.png")] private static var ImgHeart:Class;
 		[Embed(source = "data/stomach.png")] private static var ImgStomach:Class;
 		
+		public var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHand, ImgHeart, ImgStomach);
+		
 		public function Tile()
 		{
 			super();
 			
-			var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHand, ImgHeart, ImgStomach);
+			randomize();
 			
+			onUp = onClick;
+		}
+		
+		public function randomize():void
+		{
 			var random:int = Math.random() * images.length;
 			
 			loadGraphic(images[random]);
+		}
+		
+		public function onClick():void
+		{
+			randomize();
 		}
 		
 		override public function update():void
