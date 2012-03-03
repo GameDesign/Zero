@@ -42,7 +42,7 @@ package {
 		
 		public function gameOver(Object1:FlxObject,Object2:FlxObject):void 
 		{
-			FlxG.switchState(new Shop());
+			//FlxG.switchState(new Shop());
 		}
 	}
 }
