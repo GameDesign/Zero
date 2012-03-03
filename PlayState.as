@@ -11,7 +11,7 @@ package {
 			chef = new Chef();
 			zombies = new FlxGroup();
 			
-			for (var i:int = 0; i < 3;i++)
+			for (var z:int = 0; z < 3; z++)
 			{
 				zombies.add(new Zombie());
 			}
