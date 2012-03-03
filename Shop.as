@@ -8,9 +8,8 @@ package
 		{
 			var t:FlxText;
 			
-			t = new FlxText(0, FlxG.height/2, FlxG.width, "Shop");
+			t = new FlxText(0, 0, FlxG.width, "Shop");
 			t.size = 24;
-			t.y -= t.height;
 			t.alignment = "center";
 			add(t);
 			
