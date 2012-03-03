@@ -14,7 +14,7 @@ package
 			// Loads a graphic of a zombie
 			loadGraphic(ImgZombie);
 			//Choose a random speed
-			speed = Math.random() * 50;
+			speed = Math.random() * 20 + 1;
 			//Makes the y coordinate of the zombie start at the bottom
 			y = FlxG.height - height;
 		}
