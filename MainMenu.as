@@ -3,21 +3,20 @@ package {
 
 	public class MainMenu extends FlxState
 	{
+		[Embed(source="data/creeper_pixel.ttf", fontFamily="Creeper Pixel", embedAsCFF="false")] public var FntCreeperPixel:String;
 		
 		override public function create():void
 		{
 			var t:FlxText;
 			
 			t = new FlxText(0, FlxG.height/3, FlxG.width, "ZERO");
-			t.size = 32;
+			t.setFormat("Creeper Pixel", 72, 0xffffffff, "center");
 			t.y -= t.height;
-			t.alignment = "center";
 			add(t);
 			
 			t = new FlxText(0, FlxG.height, FlxG.width, "click to play");
-			t.size = 12;
+			t.setFormat("Creeper Pixel", 36, 0xffffffff, "center");
 			t.y -= t.height;
-			t.alignment = "center";
 			add(t);
 
 			// Shows the mouse cursor
