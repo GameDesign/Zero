@@ -13,16 +13,7 @@ package
 		
 		public var tileType:int;
 		public var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHand, ImgHeart, ImgStomach);
-		/*
-		public function Tile()
-		{
-			super();
-			
-			randomize();
-			
-			onUp = onClick;
-		}*/
-		
+				
 		public function Tile(type:int)
 		{
 			super();

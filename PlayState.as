@@ -27,25 +27,35 @@ package {
 			var n:int = 7;
 			for (var i:int = 0; i < n; i++)
 			{
+				//Initiates the tileBoard array to hold the tile sprites
 				tileBoard[i] = new Array(7);
+				
 				var m:int = 7;
 				for (var j:int = 0; j < m; j++)
 				{
+					//Gets the tile number from the board, then creates the tile
 					var type:int = board.GetTile(i, j);
 					var tile:Tile = new Tile(type);
+					
+					//Sets the tile sprite location, then adds it to the game
 					tile.y = 44 * i + 2 * i;
 					tile.x = 44 * j + 2 * j;
 					add(tile);
+					//Adds the tile to the tileBoard
 					tileBoard[i][j] = tile;
 				}
 			}
 			
+			//Checks for chains
 			board.checkBoard();
 			
+			//Cycles through the doneBoard, which holds values of non -1 for those
+			//tiles that are part of a chain
 			for (var row:int = 0; row < 7; row++)
 				for (var col:int = 0; col < 7; col++)
 				{
-					if (board.GetDoneTile(row, col) > 0)
+					//If the tile is part of a chain, kill the tile
+					if (board.GetDoneTile(row, col) >= 0)
 					{
 						tileBoard[row][col].kill();
 					}
