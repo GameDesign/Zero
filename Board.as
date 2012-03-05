@@ -7,25 +7,29 @@ package
 		private var board:Array = new Array(9);
 		private var doneBoard:Array = new Array(9);
 		private var tempBoard:Array = new Array(9);
+		private static var MINIMUM_MATCHES:int = 4;
+		private static var CLEAR_BOARD:int = -1;
+		private static var NUM_TILES:int = 6;
+		private static var BOARD_SIZE_BORDER:int = 9;
 		
 		private var matches:int = 0;
 		
 		public function Board() 
 		{
 			//Initialize the game board, done board, and temp board
-			for (var row:int = 0; row < 9; row++)
+			for (var row:int = 0; row < BOARD_SIZE_BORDER; row++)
 			{
 				//Create the second dimentions for each array
-				board[row] = new Array(9);
-				doneBoard[row] = new Array(9);
-				tempBoard[row] = new Array(9);
+				board[row] = new Array(BOARD_SIZE_BORDER);
+				doneBoard[row] = new Array(BOARD_SIZE_BORDER);
+				tempBoard[row] = new Array(BOARD_SIZE_BORDER);
 				
 				//Initialize each array
-				for (var col:int = 0; col < 9; col++)
+				for (var col:int = 0; col < BOARD_SIZE_BORDER; col++)
 				{
-					board[row][col] = -1;
-					doneBoard[row][col] = -1;
-					tempBoard[row][col] = -1;
+					board[row][col] = CLEAR_BOARD;
+					doneBoard[row][col] = CLEAR_BOARD;
+					tempBoard[row][col] = CLEAR_BOARD;
 				}
 			}
 			AddTiles();
@@ -36,12 +40,12 @@ package
 		 */
 		private function AddTiles():void
 		{
-			//Randomly adds tiles to board, leaving a border of -1
+			//Randomly adds tiles to board, leaving a border of CLEAR_BOARD
 			for (var row:int = 1; row < 8; row++)
 			{
 				for (var col:int = 1; col < 8; col++)
 				{
-					var random:int = Math.random() * 6;
+					var random:int = Math.random() * NUM_TILES;
 					board[row][col] = Math.round(random);
 				}
 			}
@@ -92,7 +96,7 @@ package
 			{
 				for (var col:int = 1; col < 8; col++)
 				{
-					if(doneBoard[row][col]==-1)
+					if(doneBoard[row][col]==CLEAR_BOARD)
 						checkSpot(row, col);
 				}
 			}
@@ -115,7 +119,7 @@ package
 			
 			checkChain(row, col, type);
 			
-			if (matches > 1)
+			if (matches >= MINIMUM_MATCHES)
 			{
 				copyTempBoard();
 			}
@@ -165,7 +169,7 @@ package
 		{
 			for (var row:int = 1; row < 8; row++)
 				for (var col:int = 1; col < 8; col++)
-					clearBoard[row][col] = -1;
+					clearBoard[row][col] = CLEAR_BOARD;
 		}
 		
 		

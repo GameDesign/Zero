@@ -7,7 +7,10 @@ package {
 		public var zombies:FlxGroup;
 		public var board:Board;
 		
-		public var tileBoard:Array = new Array(7);
+		private static var TILE_SIZE:int = 44;
+		private static var BOARD_SIZE:int = 7;
+		
+		public var tileBoard:Array = new Array(BOARD_SIZE);
 		
 		override public function create():void
 		{
@@ -24,22 +27,20 @@ package {
 			add(chef);
 			
 			// Creates the 7 x 7 grid of tiles
-			var n:int = 7;
-			for (var i:int = 0; i < n; i++)
+			for (var i:int = 0; i < BOARD_SIZE; i++)
 			{
 				//Initiates the tileBoard array to hold the tile sprites
-				tileBoard[i] = new Array(7);
+				tileBoard[i] = new Array(BOARD_SIZE);
 				
-				var m:int = 7;
-				for (var j:int = 0; j < m; j++)
+				for (var j:int = 0; j < BOARD_SIZE; j++)
 				{
 					//Gets the tile number from the board, then creates the tile
 					var type:int = board.GetTile(i, j);
 					var tile:Tile = new Tile(type);
 					
 					//Sets the tile sprite location, then adds it to the game
-					tile.y = 44 * i + 2 * i;
-					tile.x = 44 * j + 2 * j;
+					tile.y = (TILE_SIZE + 2) * i;
+					tile.x = (TILE_SIZE + 2) * j;
 					add(tile);
 					//Adds the tile to the tileBoard
 					tileBoard[i][j] = tile;
@@ -51,8 +52,8 @@ package {
 			
 			//Cycles through the doneBoard, which holds values of non -1 for those
 			//tiles that are part of a chain
-			for (var row:int = 0; row < 7; row++)
-				for (var col:int = 0; col < 7; col++)
+			for (var row:int = 0; row < BOARD_SIZE; row++)
+				for (var col:int = 0; col < BOARD_SIZE; col++)
 				{
 					//If the tile is part of a chain, kill the tile
 					if (board.GetDoneTile(row, col) >= 0)
