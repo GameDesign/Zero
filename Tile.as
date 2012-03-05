@@ -11,8 +11,9 @@ package
 		[Embed(source = "data/heart.png")] private static var ImgHeart:Class;
 		[Embed(source = "data/stomach.png")] private static var ImgStomach:Class;
 		
+		public var tileType:int;
 		public var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHand, ImgHeart, ImgStomach);
-		
+		/*
 		public function Tile()
 		{
 			super();
@@ -20,6 +21,13 @@ package
 			randomize();
 			
 			onUp = onClick;
+		}*/
+		
+		public function Tile(type:int)
+		{
+			super();
+			loadGraphic(images[type]);
+			tileType = type;
 		}
 		
 		public function randomize():void
