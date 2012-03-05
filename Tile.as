@@ -19,6 +19,7 @@ package
 			super();
 			loadGraphic(images[type]);
 			tileType = type;
+			onUp = onClick;
 		}
 		
 		public function randomize():void
@@ -30,7 +31,8 @@ package
 		
 		public function onClick():void
 		{
-			randomize();
+			FlxG.log("Clicked");
+			//randomize();
 		}
 		
 		override public function update():void
