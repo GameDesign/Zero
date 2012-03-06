@@ -43,10 +43,10 @@ package
 		
 		public function match():void
 		{
-			var n:int = columns - 2;
+			var n:int = columns;
 			for (var i:int = 0; i < n; i++)
 			{
-				var m:int = rows - 2;
+				var m:int = rows;
 				for (var j:int = 0; j < m; j++)
 				{
 					// There has to be a cleaner was to do this!
@@ -57,25 +57,49 @@ package
 					 sets their transparency to 50%
 					 */
 					var horizontal1:Tile = tileAt(i, j);
-					var horizontal2:Tile = tileAt(i + 1, j);
-					var horizontal3:Tile = tileAt(i + 2, j);
+					if (i + 1 < columns)
+						var horizontal2:Tile = tileAt(i + 1, j);
+					else
+						var horizontal2:Tile = null;
+					if (i + 2 < columns)
+						var horizontal3:Tile = tileAt(i + 2, j);
+					else
+						var horizontal3:Tile = null;
 					
 					var vertical1:Tile = tileAt(i, j);
-					var vertical2:Tile = tileAt(i, j + 1);
-					var vertical3:Tile = tileAt(i, j + 2);
+					if (j + 1 < rows)
+						var vertical2:Tile = tileAt(i, j + 1);
+					else
+						var vertical2:Tile = null;
+					if (j + 2 < rows)
+						var vertical3:Tile = tileAt(i, j + 2);
+					else
+						var vertical3:Tile = null;
 					
-					if (horizontal1.tileType == horizontal2.tileType && horizontal2.tileType == horizontal3.tileType)
+					FlxG.log(i + ", " + j);
+					
+					if (horizontal1 && horizontal2 && horizontal3)
 					{
-						horizontal1.alpha = 0.5;
-						horizontal2.alpha = 0.5;
-						horizontal3.alpha = 0.5;
+						FlxG.log(horizontal1.tileType + ", " + horizontal2.tileType + ", " + horizontal3.tileType);
+						if (horizontal1.tileType == horizontal2.tileType && horizontal2.tileType == horizontal3.tileType)
+						{
+							FlxG.log("Horizontal Match");
+							horizontal1.alpha = 0.5;
+							horizontal2.alpha = 0.5;
+							horizontal3.alpha = 0.5;
+						}
 					}
 					
-					if (vertical1.tileType == vertical2.tileType && vertical2.tileType == vertical3.tileType)
+					if (vertical1 && vertical2 && vertical3)
 					{
-						vertical1.alpha = 0.5;
-						vertical2.alpha = 0.5;
-						vertical3.alpha = 0.5;
+						FlxG.log(vertical1.tileType + ", " + vertical2.tileType + ", " + vertical3.tileType);
+						if (vertical1.tileType == vertical2.tileType && vertical2.tileType == vertical3.tileType)
+						{
+							FlxG.log("Vertical Match");
+							vertical1.alpha = 0.5;
+							vertical2.alpha = 0.5;
+							vertical3.alpha = 0.5;
+						}
 					}
 				}
 			}
