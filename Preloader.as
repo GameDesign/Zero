@@ -8,6 +8,7 @@ package
 		{
 			className = "Zero";
 			super();
+			// minDisplayTime = 1;
 		}
 	}
 }
