@@ -25,14 +25,13 @@ package
 		public function randomize():void
 		{
 			var random:int = Math.random() * images.length;
-			
 			loadGraphic(images[random]);
+			tileType = random;
 		}
 		
 		public function onClick():void
 		{
-			FlxG.log("Clicked");
-			//randomize();
+			randomize();
 		}
 		
 		override public function update():void

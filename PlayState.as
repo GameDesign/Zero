@@ -5,18 +5,19 @@ package {
 	
 		public var chef:Chef;
 		public var zombies:FlxGroup;
-		public var board:Board;
+		// public var board:Board;
+		public var zboard:ZBoard;
 		
-		private static var TILE_SIZE:int = 44;
-		private static var BOARD_SIZE:int = 7;
+		// private static var TILE_SIZE:int = 44;
+		// private static var BOARD_SIZE:int = 7;
 		
-		public var tileBoard:Array = new Array(BOARD_SIZE);
+		// public var tileBoard:Array = new Array(BOARD_SIZE);
 		
 		override public function create():void
 		{
 			chef = new Chef();
 			zombies = new FlxGroup();
-			board = new Board();
+			// board = new Board();
 			
 			for (var z:int = 0; z < 3; z++)
 			{
@@ -26,6 +27,15 @@ package {
 			add(zombies);
 			add(chef);
 			
+			zboard = new ZBoard();
+			
+			// because tiles is a FlxGroup it can be used to add all the tiles to the game
+			add(zboard.tiles);
+			
+			// this would need to be called after swaps and and replacing tiles
+			zboard.match();
+			
+			/*
 			// Creates the 7 x 7 grid of tiles
 			for (var i:int = 0; i < BOARD_SIZE; i++)
 			{
@@ -53,6 +63,7 @@ package {
 			//Cycles through the doneBoard, which holds values of non -1 for those
 			//tiles that are part of a chain
 			for (var row:int = 0; row < BOARD_SIZE; row++)
+			{
 				for (var col:int = 0; col < BOARD_SIZE; col++)
 				{
 					//If the tile is part of a chain, kill the tile
@@ -61,7 +72,8 @@ package {
 						tileBoard[row][col].kill();
 					}
 				}
-				
+			}
+			*/
 		}
 		
 		override public function update():void
