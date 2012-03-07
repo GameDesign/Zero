@@ -8,16 +8,18 @@ package {
 		override public function create():void
 		{
 			var t:FlxText;
+			var b:FlxButton;
 			
 			t = new FlxText(0, FlxG.height/3, FlxG.width, "ZERO");
 			t.setFormat("Creeper Pixel", 72, 0xffffffff, "center");
 			t.y -= t.height;
 			add(t);
 			
-			t = new FlxText(0, FlxG.height, FlxG.width, "click to play");
-			t.setFormat("Creeper Pixel", 36, 0xffffffff, "center");
-			t.y -= t.height;
-			add(t);
+			b = new FlxButton(125, 200, "Click to play", startGame);
+			add(b);
+			
+			b = new FlxButton(125, 250, "Options", optionsClick);
+			add(b);
 
 			// Shows the mouse cursor
 			FlxG.mouse.show();
@@ -25,10 +27,18 @@ package {
 
 		override public function update():void
 		{
-			// If the mouse was just pressed
-			if (FlxG.mouse.justPressed())
-				// Switch from the main menu to the gameplay
-				FlxG.switchState(new PlayState());
+			super.update();
+		}
+		
+		public function optionsClick():void
+		{
+			FlxG.switchState(new Options());
+			super.update();
+		}
+		
+		public function startGame():void
+		{
+			FlxG.switchState(new PlayState());
 			super.update();
 		}
 	}
