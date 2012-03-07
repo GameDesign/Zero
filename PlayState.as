@@ -1,8 +1,10 @@
 package {
 	import org.flixel.*;
 
-	public class PlayState extends FlxState {
-	
+	public class PlayState extends FlxState
+	{
+		[Embed(source="data/music.mp3")] public static var SndMusic:Class;
+		
 		public var chef:Chef;
 		public var zombies:FlxGroup;
 		// public var board:Board;
@@ -74,6 +76,8 @@ package {
 				}
 			}
 			*/
+			
+			FlxG.play(SndMusic);
 		}
 		
 		override public function update():void
