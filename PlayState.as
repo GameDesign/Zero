@@ -9,6 +9,11 @@ package {
 		public var zombies:FlxGroup;
 		// public var board:Board;
 		public var zboard:ZBoard;
+		// the amount of time played - used for spawning zombies
+		public var elapsedTime:Number;
+		// the time to wait until next spawn
+		public var spawnTime:Number;
+		public const TIME_SEED:int = 12;
 		
 		// private static var TILE_SIZE:int = 44;
 		// private static var BOARD_SIZE:int = 7;
@@ -17,15 +22,14 @@ package {
 		
 		override public function create():void
 		{
+			elapsedTime = 0;
+			spawnTime = 5;
 			chef = new Chef();
 			zombies = new FlxGroup();
-			// board = new Board();
-			
-			for (var z:int = 0; z < 3; z++)
-			{
-				zombies.add(new Zombie());
-			}
-				
+			// board = new Board
+			// start with first zombie
+			zombies.add(new Zombie());
+			// add all objects to the game
 			add(zombies);
 			add(chef);
 			
@@ -76,14 +80,26 @@ package {
 				}
 			}
 			*/
-			
+			// play BGM
 			FlxG.play(SndMusic);
+			FlxG.watch(this, "elapsedTime");
 		}
 		
 		override public function update():void
 		{
 			super.update();
+			// check collisions
 			FlxG.collide(zombies, chef, gameOver);
+			// if enough time has passed, spawn new zombie
+			elapsedTime += FlxG.elapsed;			
+			if (elapsedTime >= spawnTime)
+			{
+				zombies.add(new Zombie());
+				add(zombies);
+				// reset timer
+				elapsedTime = 0;
+				spawnTime = FlxG.random() * TIME_SEED;
+			}
 		}
 		
 		public function gameOver(Object1:FlxObject,Object2:FlxObject):void 

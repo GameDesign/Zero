@@ -6,6 +6,7 @@ package
 	{
 		[Embed(source = "data/zombie.png")] private static var ImgZombie:Class;
 		
+		// vars
 		public var speed:int;
 		
 		public function Zombie()
@@ -16,6 +17,7 @@ package
 			//Choose a random speed
 			speed = Math.random() * 15 + 1;
 			//Makes the y coordinate of the zombie start at the bottom
+			x = -width;
 			y = FlxG.height - height;
 		}
 		
