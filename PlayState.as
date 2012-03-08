@@ -13,6 +13,7 @@ package {
 		public var elapsedTime:Number;
 		// the time to wait until next spawn
 		public var spawnTime:Number;
+		public const TIME_SEED:int = 12;
 		
 		// private static var TILE_SIZE:int = 44;
 		// private static var BOARD_SIZE:int = 7;
@@ -97,6 +98,7 @@ package {
 				add(zombies);
 				// reset timer
 				elapsedTime = 0;
+				spawnTime = FlxG.random() * TIME_SEED;
 			}
 		}
 		
