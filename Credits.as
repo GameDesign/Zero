@@ -18,7 +18,7 @@ package
 			add(t);
 			
 			b = new FlxButton(125, 300, "Back", stopCredits);
-			add(b);
+			add(b); 
 			
 		}
 		

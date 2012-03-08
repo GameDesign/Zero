@@ -24,7 +24,7 @@ package {
 
 			// Shows the mouse cursor
 			FlxG.mouse.show();
-			FlxG.play(SndMusic);
+			FlxG.play(SndMusic); 
 		}
 
 		override public function update():void

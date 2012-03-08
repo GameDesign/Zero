@@ -50,7 +50,7 @@ package
 		public function backToMain():void
 		{
 			FlxG.switchState(new MainMenu());
-			super.update();
+			super.update(); 
 		}
 	}
 }
