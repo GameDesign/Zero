@@ -16,6 +16,7 @@ package
 			//Choose a random speed
 			speed = Math.random() * 15 + 1;
 			//Makes the y coordinate of the zombie start at the bottom
+			x = -width;
 			y = FlxG.height - height;
 		}
 		
