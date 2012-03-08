@@ -23,7 +23,7 @@ package
 				{
 					var tile:ZTile = new ZTile(this);
 					
-					tile.y = (tile.height + 2) * i;
+					tile.y = (tile.height + 2) * i + 30;
 					tile.x = (tile.width + 2) * j;
 					tiles.add(tile);
 				}
