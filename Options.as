@@ -21,6 +21,10 @@ package
 			
 			b = new FlxButton(125, 200, "Turn on/off Sound Effects", soundEffects);
 			add(b);
+			
+			b = new FlxButton(125, 250, "Back", backToMain);
+			add(b);
+			
 		}
 		
 		override public function update():void
@@ -41,6 +45,12 @@ package
 		public function soundEffects():void
 		{
 			
+		}
+		
+		public function backToMain():void
+		{
+			FlxG.switchState(new MainMenu());
+			super.update();
 		}
 	}
 }

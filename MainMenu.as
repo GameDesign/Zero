@@ -3,7 +3,8 @@ package {
 
 	public class MainMenu extends FlxState
 	{
-		[Embed(source="data/creeper_pixel.ttf", fontFamily="Creeper Pixel", embedAsCFF="false")] public var FntCreeperPixel:String;
+		[Embed(source = "data/creeper_pixel.ttf", fontFamily = "Creeper Pixel", embedAsCFF = "false")] public var FntCreeperPixel:String;
+		[Embed(source = "data/music.mp3")] public static var SndMusic:Class;		
 		
 		override public function create():void
 		{
@@ -23,6 +24,7 @@ package {
 
 			// Shows the mouse cursor
 			FlxG.mouse.show();
+			FlxG.play(SndMusic);
 		}
 
 		override public function update():void
