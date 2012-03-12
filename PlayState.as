@@ -4,11 +4,12 @@ package
 	
 	public class PlayState extends FlxState
 	{
-		[Embed(source="data/music.mp3")]
-		public static var SndMusic:Class;
+		[Embed(source="data/music.mp3")] public static var SndMusic:Class;
+		[Embed(source = "data/pause.png")] private static var ImgPause:Class;
 		
 		public var chef:Chef;
 		public var zombies:FlxGroup;
+		public var pauseButton:FlxButton;
 		public var pauseText:FlxText;
 		public var pause:FlxGroup;
 		// public var board:Board;
@@ -31,8 +32,14 @@ package
 			chef = new Chef();
 			zombies = new FlxGroup();
 			pause = new FlxGroup();
-			pauseText = new FlxText(125, 150, 200, "Paused!");
+			pauseText = new FlxText(0, FlxG.height/2, FlxG.width, "Paused!");
 			pauseText.setFormat("Creeper Pixel", 60, 0xffffffff, "center");
+			
+			pauseButton = new FlxButton();
+			pauseButton.loadGraphic(ImgPause, true, false, 16, 16);
+			pauseButton.x = FlxG.width - pauseButton.width;
+			pauseButton.onUp = pauseGame;
+			add(pauseButton);
 			
 			// board = new Board
 			// start with first zombie
@@ -90,7 +97,23 @@ package
 			 */
 			// play BGM
 			FlxG.play(SndMusic);
-			FlxG.watch(this, "elapsedTime");
+		}
+		
+		public function pauseGame():void
+		{
+			if (!FlxG.paused)
+			{
+				FlxG.paused = true;
+				add(pauseText);
+				pause.revive();
+			}
+			else
+			{
+				FlxG.paused = false;
+				remove(pauseText);
+				pause.alive = false;
+				pause.exists = false;
+			}
 		}
 		
 		override public function update():void
