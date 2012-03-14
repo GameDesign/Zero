@@ -14,19 +14,19 @@ package
 			t.setFormat("Creeper Pixel", 72, 0xffffffff, "center");
 			add(t);
 			
-			b = new FlxButton(85, 100, "Credits", credits);
+			b = new FlxButton((FlxG.width / 2) - 50, 100, "Credits", credits);
 			b.loadGraphic(ButtonImage, false, false);
 			add(b);
 			
-			b = new FlxButton(85, 150, "Turn on/off Music", music);
+			b = new FlxButton((FlxG.width / 2) - 50, 150, "Turn on/off Music", music);
 			b.loadGraphic(ButtonImage, false, false);
 			add(b);
 			
-			b = new FlxButton(85, 200, "Turn on/off Sound Effects", soundEffects);
+			b = new FlxButton((FlxG.width / 2) - 50, 200, "Turn on/off Sound Effects", soundEffects);
 			b.loadGraphic(ButtonImage, false, false);
 			add(b);
 			
-			b = new FlxButton(85, 250, "Back", backToMain);
+			b = new FlxButton((FlxG.width / 2) - 50, 250, "Back", backToMain);
 			b.loadGraphic(ButtonImage, false, false);
 			add(b);
 		}

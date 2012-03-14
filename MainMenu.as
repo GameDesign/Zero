@@ -17,11 +17,11 @@ package {
 			t.y -= t.height;
 			add(t);
 			
-			b = new FlxButton(85, 200, "Click to play", startGame);
+			b = new FlxButton((FlxG.width / 2) - 50, 200, "Click to play", startGame);
 			b.loadGraphic(ButtonImage, false, false);
 			add(b);
 			
-			b = new FlxButton(85, 250, "Options", optionsClick);
+			b = new FlxButton((FlxG.width / 2) - 50, 250, "Options", optionsClick);
 			b.loadGraphic(ButtonImage, false, false);
 			add(b);
 
