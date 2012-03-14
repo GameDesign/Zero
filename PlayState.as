@@ -7,12 +7,13 @@ package
 		[Embed(source="data/music.mp3")] public static var SndMusic:Class;
 		[Embed(source = "data/pause.png")] private static var ImgPause:Class;
 		
+		public var board:Board;
 		public var chef:Chef;
 		public var zombies:FlxGroup;
+		
 		public var pauseButton:FlxButton;
 		public var pauseText:FlxText;
 		public var pause:FlxGroup;
-		public var board:Board;
 		
 		// the amount of time played - used for spawning zombies
 		public var elapsedTime:Number;
@@ -24,26 +25,26 @@ package
 		{
 			elapsedTime = 0;
 			spawnTime = 5;
+			
+			board = new Board();
 			chef = new Chef();
 			zombies = new FlxGroup();
 			pause = new FlxGroup();
+			
 			pauseText = new FlxText(0, FlxG.height/2, FlxG.width, "Paused!");
 			pauseText.setFormat("Creeper Pixel", 60, 0xffffffff, "center");
-			
 			pauseButton = new FlxButton();
 			pauseButton.loadGraphic(ImgPause, true, false, 16, 16);
-			pauseButton.x = FlxG.width - pauseButton.width;
+			pauseButton.x = FlxG.width - pauseButton.width * 2;
+			pauseButton.y = pauseButton.height / 2;
 			pauseButton.onUp = pauseGame;
 			add(pauseButton);
 			
-			// board = new Board
 			// start with first zombie
 			zombies.add(new Zombie());
 			// add all objects to the game
 			add(zombies);
 			add(chef);
-			
-			board = new Board();
 			
 			// because tiles is a FlxGroup it can be used to add all the tiles to the game
 			add(board.tiles);
