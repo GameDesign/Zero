@@ -12,18 +12,13 @@ package
 		public var pauseButton:FlxButton;
 		public var pauseText:FlxText;
 		public var pause:FlxGroup;
-		// public var board:Board;
 		public var zboard:ZBoard;
+		
 		// the amount of time played - used for spawning zombies
 		public var elapsedTime:Number;
 		// the time to wait until next spawn
 		public var spawnTime:Number;
 		public const TIME_SEED:int = 12;
-		
-		// private static var TILE_SIZE:int = 44;
-		// private static var BOARD_SIZE:int = 7;
-		
-		// public var tileBoard:Array = new Array(BOARD_SIZE);
 		
 		override public function create():void
 		{
@@ -57,45 +52,6 @@ package
 			//zboard.match();
 			zboard.checkBoard();
 			
-			/*
-			   // Creates the 7 x 7 grid of tiles
-			   for (var i:int = 0; i < BOARD_SIZE; i++)
-			   {
-			   //Initiates the tileBoard array to hold the tile sprites
-			   tileBoard[i] = new Array(BOARD_SIZE);
-			
-			   for (var j:int = 0; j < BOARD_SIZE; j++)
-			   {
-			   //Gets the tile number from the board, then creates the tile
-			   var type:int = board.GetTile(i, j);
-			   var tile:Tile = new Tile(type);
-			
-			   //Sets the tile sprite location, then adds it to the game
-			   tile.y = (TILE_SIZE + 2) * i;
-			   tile.x = (TILE_SIZE + 2) * j;
-			   add(tile);
-			   //Adds the tile to the tileBoard
-			   tileBoard[i][j] = tile;
-			   }
-			   }
-			
-			   //Checks for chains
-			   board.checkBoard();
-			
-			   //Cycles through the doneBoard, which holds values of non -1 for those
-			   //tiles that are part of a chain
-			   for (var row:int = 0; row < BOARD_SIZE; row++)
-			   {
-			   for (var col:int = 0; col < BOARD_SIZE; col++)
-			   {
-			   //If the tile is part of a chain, kill the tile
-			   if (board.GetDoneTile(row, col) >= 0)
-			   {
-			   tileBoard[row][col].kill();
-			   }
-			   }
-			   }
-			 */
 			// play BGM
 			FlxG.play(SndMusic);
 		}
@@ -145,7 +101,6 @@ package
 				}
 			}
 			
-		//	super.update();
 			// check collisions
 			FlxG.collide(zombies, chef, gameOver);
 			// if enough time has passed, spawn new zombie
