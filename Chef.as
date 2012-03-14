@@ -9,7 +9,7 @@ package
 		public function Chef()
 		{
 			super();	// calls the flxSprite constructor
-			loadGraphic(ImgChef); // make him 64*64 and white
+			loadGraphic(ImgChef); // load graphic
 			x = FlxG.width - width;	// he's on the right
 			y = FlxG.height - height;	// put him down on the bottom of the screen
 			immovable = true;	// obvious

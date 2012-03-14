@@ -17,12 +17,15 @@ package {
 			t.y -= t.height;
 			add(t);
 			
-			b = new FlxButton((FlxG.width / 2) - 50, 200, "Click to play", startGame);
+			b = new FlxButton(FlxG.width / 2, FlxG.height / 2, "Click to play", startGame);
 			b.loadGraphic(ButtonImage, false, false);
+			b.x -= b.width / 2;
 			add(b);
 			
-			b = new FlxButton((FlxG.width / 2) - 50, 250, "Options", optionsClick);
+			b = new FlxButton(FlxG.width / 2, FlxG.height / 2, "Options", optionsClick);
 			b.loadGraphic(ButtonImage, false, false);
+			b.x -= b.width / 2;
+			b.y += b.height * 2;
 			add(b);
 
 			// Shows the mouse cursor
