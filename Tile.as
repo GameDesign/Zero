@@ -2,7 +2,7 @@ package
 {
 	import org.flixel.*;
 	
-	public class ZTile extends FlxButton
+	public class Tile extends FlxButton
 	{
 		[Embed(source = "data/bullet.png")] private static var ImgBullet:Class;
 		[Embed(source = "data/brain.png")] private static var ImgBrain:Class;
@@ -11,14 +11,14 @@ package
 		[Embed(source = "data/heart.png")] private static var ImgHeart:Class;
 		[Embed(source = "data/stomach.png")] private static var ImgStomach:Class;
 		
-		public var board:ZBoard;
+		public var board:Board;
 		public var type:int;
 		public var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHand, ImgHeart, ImgStomach);
 		
-		public function ZTile(Board:ZBoard)
+		public function Tile(b:Board)
 		{
 			super();
-			board = Board;
+			board = b;
 			type = Math.random() * images.length;
 			loadGraphic(images[type]);
 			onUp = onClick;

@@ -2,12 +2,12 @@ package
 {
 	import org.flixel.*;
 	
-	public class ZBoard
+	public class Board
 	{
 		public var columns:int;
 		public var rows:int;
 		public var tiles:FlxGroup;
-		public var toggle:ZTile;
+		public var toggle:Tile;
 		
 		private var doneBoard:Array = new Array(9);
 		private var tempBoard:Array = new Array(9);
@@ -17,7 +17,7 @@ package
 		
 		private var matches:int = 0;
 		
-		public function ZBoard() 
+		public function Board() 
 		{
 			
 			//Initialize the game board, done board, and temp board
@@ -48,7 +48,7 @@ package
 				var m:int = rows;
 				for (var j:int = 0; j < m; j++)
 				{
-					var tile:ZTile = new ZTile(this);
+					var tile:Tile = new Tile(this);
 					
 					tile.y = (tile.height + 2) * i + 30;
 					tile.x = (tile.width + 2) * j;
@@ -57,7 +57,7 @@ package
 			}
 		}
 		
-		public function swap(tile:ZTile):void
+		public function swap(tile:Tile):void
 		{
 			if (!toggle)
 				return;
@@ -120,7 +120,7 @@ package
 			toggle = null;
 		}
 		
-		public function tileAt(column:int, row:int):ZTile
+		public function tileAt(column:int, row:int):Tile
 		{
 			/*
 			 members is a one dimensional array within the FlxGroup
@@ -261,25 +261,25 @@ package
 					 to see if they have the same type and if they do
 					 sets their transparency to 50%
 					 */
-					var horizontal1:ZTile = tileAt(i, j);
+					var horizontal1:Tile = tileAt(i, j);
 					if (i + 1 < columns)
-						var horizontal2:ZTile = tileAt(i + 1, j);
+						var horizontal2:Tile = tileAt(i + 1, j);
 					else
-						var horizontal2:ZTile = null;
+						var horizontal2:Tile = null;
 					if (i + 2 < columns)
-						var horizontal3:ZTile = tileAt(i + 2, j);
+						var horizontal3:Tile = tileAt(i + 2, j);
 					else
-						var horizontal3:ZTile = null;
+						var horizontal3:Tile = null;
 					
-					var vertical1:ZTile = tileAt(i, j);
+					var vertical1:Tile = tileAt(i, j);
 					if (j + 1 < rows)
-						var vertical2:ZTile = tileAt(i, j + 1);
+						var vertical2:Tile = tileAt(i, j + 1);
 					else
-						var vertical2:ZTile = null;
+						var vertical2:Tile = null;
 					if (j + 2 < rows)
-						var vertical3:ZTile = tileAt(i, j + 2);
+						var vertical3:Tile = tileAt(i, j + 2);
 					else
-						var vertical3:ZTile = null;
+						var vertical3:Tile = null;
 					
 					// FlxG.log(i + ", " + j);
 					

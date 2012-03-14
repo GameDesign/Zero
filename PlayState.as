@@ -12,7 +12,7 @@ package
 		public var pauseButton:FlxButton;
 		public var pauseText:FlxText;
 		public var pause:FlxGroup;
-		public var zboard:ZBoard;
+		public var board:Board;
 		
 		// the amount of time played - used for spawning zombies
 		public var elapsedTime:Number;
@@ -43,14 +43,14 @@ package
 			add(zombies);
 			add(chef);
 			
-			zboard = new ZBoard();
+			board = new Board();
 			
 			// because tiles is a FlxGroup it can be used to add all the tiles to the game
-			add(zboard.tiles);
+			add(board.tiles);
 			
 			// this would need to be called after swaps and and replacing tiles
 			//zboard.match();
-			zboard.checkBoard();
+			board.checkBoard();
 			
 			// play BGM
 			FlxG.play(SndMusic);
