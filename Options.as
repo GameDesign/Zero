@@ -18,11 +18,11 @@ package
 			b.loadGraphic(ButtonImage, false, false);
 			add(b);
 			
-			b = new FlxButton((FlxG.width / 2) - 50, 150, "Turn on/off Music", music);
+			b = new FlxButton((FlxG.width / 2) - 50, 150, "Toggle Song", music);
 			b.loadGraphic(ButtonImage, false, false);
 			add(b);
 			
-			b = new FlxButton((FlxG.width / 2) - 50, 200, "Turn on/off Sound Effects", soundEffects);
+			b = new FlxButton((FlxG.width / 2) - 50, 200, "Toggle SFX", soundEffects);
 			b.loadGraphic(ButtonImage, false, false);
 			add(b);
 			
