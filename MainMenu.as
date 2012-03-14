@@ -4,7 +4,8 @@ package {
 	public class MainMenu extends FlxState
 	{
 		[Embed(source = "data/creeper_pixel.ttf", fontFamily = "Creeper Pixel", embedAsCFF = "false")] public var FntCreeperPixel:String;
-		[Embed(source = "data/music.mp3")] public static var SndMusic:Class;		
+		[Embed(source = "data/music.mp3")] public static var SndMusic:Class;	
+		[Embed(source = "data/button_image.png")] public static var ButtonImage:Class;
 		
 		override public function create():void
 		{
@@ -16,10 +17,12 @@ package {
 			t.y -= t.height;
 			add(t);
 			
-			b = new FlxButton(125, 200, "Click to play", startGame);
+			b = new FlxButton(85, 200, "Click to play", startGame);
+			b.loadGraphic(ButtonImage, false, false);
 			add(b);
 			
-			b = new FlxButton(125, 250, "Options", optionsClick);
+			b = new FlxButton(85, 250, "Options", optionsClick);
+			b.loadGraphic(ButtonImage, false, false);
 			add(b);
 
 			// Shows the mouse cursor

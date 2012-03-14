@@ -5,6 +5,7 @@ package
 	
 	public class Credits extends FlxState
 	{
+		[Embed(source = "data/button_image.png")] public static var ButtonImage:Class;
 		override public function create():void
 		{
 			var t:FlxText;
@@ -17,7 +18,8 @@ package
 			t = new FlxText(125, 200, FlxG.width, "Designed and Developed By:\nBrandon Kerr\nSpencer Baynton\nNick Schudlo\nTaylor Jackson");
 			add(t);
 			
-			b = new FlxButton(125, 300, "Back", stopCredits);
+			b = new FlxButton(85, 300, "Back", stopCredits);
+			b.loadGraphic(ButtonImage, false, false);
 			add(b); 
 			
 		}
