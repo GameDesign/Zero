@@ -160,6 +160,8 @@ package
 				{
 					if (doneBoard[row + 1][col + 1] > -1)
 						tileAt(col, row).alpha = 0.5;
+						else
+						tileAt(col, row).alpha = 1;
 				}
 			}
 		}
