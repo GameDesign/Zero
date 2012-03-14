@@ -5,7 +5,7 @@ package {
 	{
 		[Embed(source = "data/creeper_pixel.ttf", fontFamily = "Creeper Pixel", embedAsCFF = "false")] public var FntCreeperPixel:String;
 		[Embed(source = "data/music.mp3")] public static var SndMusic:Class;	
-		[Embed(source = "data/button_image.png")] public static var ButtonImage:Class;
+		[Embed(source = "data/button_image3.png")] public static var ButtonImage:Class;
 		
 		override public function create():void
 		{

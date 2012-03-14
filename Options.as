@@ -4,7 +4,7 @@ package
 	
 	public class Options extends FlxState
 	{
-		[Embed(source = "data/button_image.png")] public static var ButtonImage:Class;
+		[Embed(source = "data/button_image3.png")] public static var ButtonImage:Class;
 		override public function create():void
 		{
 			var t:FlxText;
