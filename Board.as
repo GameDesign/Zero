@@ -19,7 +19,7 @@ package
 			//Initialize the game board, done board, and temp board
 			for (var row:int = 0; row < BOARD_SIZE_BORDER; row++)
 			{
-				//Create the second dimentions for each array
+				//Create the second dimensions for each array
 				board[row] = new Array(BOARD_SIZE_BORDER);
 				doneBoard[row] = new Array(BOARD_SIZE_BORDER);
 				tempBoard[row] = new Array(BOARD_SIZE_BORDER);

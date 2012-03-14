@@ -54,7 +54,8 @@ package
 			add(zboard.tiles);
 			
 			// this would need to be called after swaps and and replacing tiles
-			zboard.match();
+			//zboard.match();
+			zboard.checkBoard();
 			
 			/*
 			   // Creates the 7 x 7 grid of tiles
