@@ -14,8 +14,10 @@ package
 		private static var MINIMUM_MATCHES:int = 4;
 		private static var CLEAR_BOARD:int = -1;
 		private static var BOARD_SIZE_BORDER:int = 9;
+		private static var BULLET:int = 0;
 		
 		private var matches:int = 0;
+		private var initialBoardCheck:int = 1;
 		
 		public function Board() 
 		{
@@ -55,6 +57,63 @@ package
 					tiles.add(tile);
 				}
 			}
+			/*
+			tiles.members[0].setType(0);
+			tiles.members[1].setType(5);
+			tiles.members[2].setType(5);
+			tiles.members[3].setType(1);
+			tiles.members[4].setType(2);
+			tiles.members[5].setType(4);
+			tiles.members[6].setType(4);
+			
+			tiles.members[7].setType(3);
+			tiles.members[8].setType(5);
+			tiles.members[9].setType(3);
+			tiles.members[10].setType(0);
+			tiles.members[11].setType(3);
+			tiles.members[12].setType(0);
+			tiles.members[13].setType(2);
+			
+			tiles.members[14].setType(3);
+			tiles.members[15].setType(0);
+			tiles.members[16].setType(5);
+			tiles.members[17].setType(3);
+			tiles.members[18].setType(5);
+			tiles.members[19].setType(4);
+			tiles.members[20].setType(0);
+			
+			tiles.members[21].setType(0);
+			tiles.members[22].setType(2);
+			tiles.members[23].setType(2);
+			tiles.members[24].setType(4);
+			tiles.members[25].setType(0);
+			tiles.members[26].setType(2);
+			tiles.members[27].setType(5);
+			
+			tiles.members[28].setType(2);
+			tiles.members[29].setType(2);
+			tiles.members[30].setType(0);
+			tiles.members[31].setType(4);
+			tiles.members[32].setType(2);
+			tiles.members[33].setType(0);
+			tiles.members[34].setType(4);
+		
+			tiles.members[35].setType(2);
+			tiles.members[36].setType(3);
+			tiles.members[37].setType(0);
+			tiles.members[38].setType(2);
+			tiles.members[39].setType(3);
+			tiles.members[40].setType(4);
+			tiles.members[41].setType(3);
+			
+			tiles.members[42].setType(1);
+			tiles.members[43].setType(0);
+			tiles.members[44].setType(2);
+			tiles.members[45].setType(0);
+			tiles.members[46].setType(4);
+			tiles.members[47].setType(5);
+			tiles.members[48].setType(3);
+			*/
 		}
 		
 		public function swap(tile:Tile):void
@@ -130,16 +189,51 @@ package
 			return tiles.members[(row + 1) * rows - (columns - (column))];
 		}
 		
+		/**
+		 * Function which handles the board checking. First there is an initial check to see
+		 * if the call is to initialize the board for a new game. This creates a loop which replaces
+		 * chains until no chains exist on the board.
+		 * 
+		 * There is then a loop to see if any tiles are currently fading from a previous chain creation.
+		 * If any tiles are fading, no chain checking is done. As each tile finishes its fade, it sets
+		 * its fade value to false and calls this function. Only once the last tile which is fading calls 
+		 * this function will it actually recheck the board for chains, possibly causing a cascading effect
+		 * where more chains are created and fade away.
+		 */
+		public function checkBoard():void
+		{
+			//Initial loop to create a chain free board
+			if (initialBoardCheck)
+			{
+				while (checkForChains()) { } //loops until first board has no chains
+				initialBoardCheck = 0;
+			}
+			//Called once a swap has been made, or new tiles have been randomized on the board
+			else
+			{
+				var fading:Boolean = false;
+				//If any tiles are still fading, the 'fading' boolean will be set to true
+				for (var index:int = 0; index < tiles.length; index++)
+				{
+					if (tiles.members[index].fade == true)
+						fading = true;
+				}
+				
+				//Prevents chain checking when tiles are fading
+				if(!fading)
+					checkForChains();
+			}
+		}
 		
 		/**
 		 * Function to check the entire board for chains
 		 */
-		public function checkBoard():void
+		public function checkForChains():int
 		{
 			clearBoard(doneBoard);
 			
-			//First pass through checks every location if that location is part of a chain
-			//The result of this section will be to have the done board display -1 in every
+			//First pass through checks every location if that location is part of a chain.
+			//**The result of this section will be to have the done board display -1 in every
 			//location not in a chain(as well as the border), and a number in the location of
 			//a chain (number corresponding to tile type:brain, leg, ect)
 			for (var row:int = 0; row < rows; row++)
@@ -147,11 +241,12 @@ package
 				for (var col:int = 0; col < columns; col++)
 				{
 					if(doneBoard[row+1][col+1]==CLEAR_BOARD)//plus 1 to account for border
-					checkLocation(row, col);
-					
+						checkLocation(row, col);
 				}
 			}
 			
+			var match:int = 0;
+
 			//This pass goes through the done board and does something to each tile which contains
 			//a chain
 			for (var row:int = 0; row < rows; row++)
@@ -159,12 +254,22 @@ package
 				for (var col:int = 0; col < columns; col++)
 				{
 					if (doneBoard[row + 1][col + 1] > -1)
-						tileAt(col, row).alpha = 0.5;
+					{
+						//tileAt(col, row).alpha = 0.5;
+						if (initialBoardCheck)
+							tileAt(col, row).randomize();
 						else
+							tileAt(col, row).fadeOut();
+						match++;
+					}
+					else
 						tileAt(col, row).alpha = 1;
 				}
 			}
+			
+			return match;
 		}
+		
 		
 		/**
 		 * function to check if a specific board tile is part of a chain. First a check is
@@ -213,13 +318,13 @@ package
 			matches += 1;
 			
 			//Check all surrounding tiles
-			if (row-1 >= 0 && type == tileAt(col, row - 1).type)
+			if (row - 1 >= 0 && (type == tileAt(col, row - 1).type || tileAt(col, row - 1).type == BULLET))
 			checkChain(row - 1, col, type);
-			if (col-1 >= 0 && type == tileAt(col - 1, row).type)
+			if (col - 1 >= 0 && (type == tileAt(col - 1, row).type || tileAt(col - 1, row).type == BULLET))
 			checkChain(row, col - 1, type);
-			if (row+1 < rows && type == tileAt(col, row + 1).type)
+			if (row + 1 < rows && (type == tileAt(col, row + 1).type || tileAt(col, row + 1).type == BULLET))
 			checkChain(row + 1, col, type);
-			if (col+1 < columns && type == tileAt(col + 1, row).type)
+			if (col + 1 < columns && (type == tileAt(col + 1, row).type || tileAt(col + 1, row).type == BULLET))
 			checkChain(row, col + 1, type);
 				
 		}

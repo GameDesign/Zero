@@ -52,6 +52,7 @@ package
 			// this would need to be called after swaps and and replacing tiles
 			//zboard.match();
 			board.checkBoard();
+			//while (board.checkBoard()){}
 			
 			// play BGM
 			FlxG.play(SndMusic);

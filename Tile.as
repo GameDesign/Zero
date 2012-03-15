@@ -14,6 +14,7 @@ package
 		public var board:Board;
 		public var type:int;
 		public var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHand, ImgHeart, ImgStomach);
+		public var fade:Boolean;
 		
 		public function Tile(b:Board)
 		{
@@ -22,6 +23,7 @@ package
 			type = Math.random() * images.length;
 			loadGraphic(images[type]);
 			onUp = onClick;
+			fade = false;
 		}
 		
 		public function randomize():void
@@ -29,7 +31,15 @@ package
 			var random:int = Math.random() * images.length;
 			loadGraphic(images[random]);
 			type = random;
-			board.match();
+			alpha = 1;
+			fade = false;
+			board.checkBoard();
+		}
+		
+		public function setType(newType:int):void
+		{
+			loadGraphic(images[newType]);
+			type = newType;
 		}
 		
 		public function onClick():void
@@ -40,9 +50,25 @@ package
 				board.swap(this);
 		}
 		
+		public function fadeOut():void
+		{
+			//this.alpha = 0.5;
+			fade = true;
+		}
+		
 		override public function update():void
 		{
 			super.update();
+			
+			if (fade)
+			{
+				//this.alpha = 0.5;
+				if(alpha > 0)
+					alpha -= 0.1;
+				else
+					randomize();
+					
+			}
 		}
 	}
 }
