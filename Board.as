@@ -257,7 +257,7 @@ package
 					{
 						//tileAt(col, row).alpha = 0.5;
 						if (initialBoardCheck)
-							tileAt(col, row).randomize();
+							tileAt(col, row).randomizeNoCheck();
 						else
 							tileAt(col, row).fadeOut();
 						match++;

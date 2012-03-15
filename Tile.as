@@ -20,7 +20,7 @@ package
 		{
 			super();
 			board = b;
-			type = Math.random() * images.length;
+			type = (Math.random() * images.length-1)+1;
 			loadGraphic(images[type]);
 			onUp = onClick;
 			fade = false;
@@ -34,6 +34,13 @@ package
 			alpha = 1;
 			fade = false;
 			board.checkBoard();
+		}
+		
+		public function randomizeNoCheck():void
+		{
+			var random:int = Math.random() * images.length;
+			loadGraphic(images[random]);
+			type = random;
 		}
 		
 		public function setType(newType:int):void
