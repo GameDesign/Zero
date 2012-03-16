@@ -15,6 +15,8 @@ package
 		public var pauseText:FlxText;
 		public var pause:FlxGroup;
 		
+		public var mainMenuButton:FlxButton;
+		
 		// the amount of time played - used for spawning zombies
 		public var elapsedTime:Number;
 		// the time to wait until next spawn
@@ -30,6 +32,9 @@ package
 			chef = new Chef();
 			zombies = new FlxGroup();
 			pause = new FlxGroup();
+			
+			mainMenuButton = new FlxButton(0, 0, "Main", goToMain);
+			add(mainMenuButton);
 			
 			pauseText = new FlxText(0, FlxG.height/2, FlxG.width, "Paused!");
 			pauseText.setFormat("Creeper Pixel", 60, 0xffffffff, "center");
@@ -120,6 +125,12 @@ package
 		public function gameOver(Object1:FlxObject, Object2:FlxObject):void
 		{
 			//FlxG.switchState(new Shop());
+		}
+		
+		public function goToMain()
+		{
+			FlxG.switchState(new MainMenu());
+			super.update(); 
 		}
 	}
 }
