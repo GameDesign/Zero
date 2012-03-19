@@ -1,0 +1,22 @@
+package  
+{
+	import org.flixel.*;
+	
+	public class Pause extends FlxSprite
+	{
+		[Embed(source = "data/pause_bg.png")] private static var PauseIMG:Class;
+		
+		public function Pause()
+		{
+			super();
+			// Loads a graphic of a pause menu
+			loadGraphic(PauseIMG);
+			y = FlxG.height - height - 50;
+		}
+		
+		override public function update():void 
+		{
+			super.update();
+		}
+	}
+}

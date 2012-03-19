@@ -1,15 +1,18 @@
 package
 {
+	import flash.display.PixelSnapping;
 	import org.flixel.*;
 	
 	public class PlayState extends FlxState
 	{
 		[Embed(source="data/music.mp3")] public static var SndMusic:Class;
 		[Embed(source = "data/pause.png")] private static var ImgPause:Class;
+		[Embed(source = "data/mainmenubuttonimage.png")] private static var MMButtonIMG:Class;
 		
 		public var board:Board;
 		public var chef:Chef;
 		public var zombies:FlxGroup;
+		public var pauseIMG:Pause;
 		
 		public var pauseButton:FlxButton;
 		public var pauseText:FlxText;
@@ -30,10 +33,12 @@ package
 			
 			board = new Board();
 			chef = new Chef();
+			pauseIMG = new Pause();
 			zombies = new FlxGroup();
 			pause = new FlxGroup();
 			
-			mainMenuButton = new FlxButton(0, 0, "Main", goToMain);
+			mainMenuButton = new FlxButton(5, 5, "", goToMain);
+			mainMenuButton.loadGraphic(MMButtonIMG, false, false);
 			add(mainMenuButton);
 			
 			pauseText = new FlxText(0, FlxG.height/2, FlxG.width, "Paused!");
@@ -68,6 +73,7 @@ package
 			if (!FlxG.paused)
 			{
 				FlxG.paused = true;
+				add(pauseIMG);
 				add(pauseText);
 				pause.revive();
 			}
@@ -75,6 +81,7 @@ package
 			{
 				FlxG.paused = false;
 				remove(pauseText);
+				remove(pauseIMG);
 				pause.alive = false;
 				pause.exists = false;
 			}
