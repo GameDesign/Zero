@@ -15,22 +15,32 @@ package
 		public var type:int;
 		public var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHand, ImgHeart, ImgStomach);
 		public var fade:Boolean;
+		private var BULLET_PROBABILITY:int = 200;
 		
 		public function Tile(b:Board)
 		{
 			super();
 			board = b;
-			type = (Math.random() * images.length-1)+1;
+			type = (Math.random() * (images.length - 1)) + 1;
 			loadGraphic(images[type]);
 			onUp = onClick;
 			fade = false;
 		}
 		
+		public function pickTile():int
+		{
+			var random:int = (Math.random() * (images.length - 1))+1;
+			var bulletChance:int = Math.random() * BULLET_PROBABILITY;
+			if (bulletChance == 0 )
+				random = 0;
+			return random;
+		}
+		
 		public function randomize():void
 		{
-			var random:int = Math.random() * images.length;
-			loadGraphic(images[random]);
-			type = random;
+			
+			type = pickTile();
+			loadGraphic(images[type]);
 			alpha = 1;
 			fade = false;
 			board.checkBoard();
@@ -38,9 +48,8 @@ package
 		
 		public function randomizeNoCheck():void
 		{
-			var random:int = Math.random() * images.length;
-			loadGraphic(images[random]);
-			type = random;
+			type = pickTile();
+			loadGraphic(images[type]);
 		}
 		
 		public function setType(newType:int):void
