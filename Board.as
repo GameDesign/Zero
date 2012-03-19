@@ -125,22 +125,6 @@ package
 			var x:int = toggle.x;
 			var y:int = toggle.y;
 			
-			var n:int = rows;
-			for (var i:int = 0; i < n; i++)
-			{
-				var string:String = "";
-				var m:int = columns;
-				for (var j:int = 0; j < m; j++)
-				{
-					string += tileAt(j, i).type;
-				}
-				FlxG.log(string);
-			}
-			
-			FlxG.log("-------");
-			
-			FlxG.log(tiles.members.indexOf(toggle) + " < " + tiles.members.indexOf(tile));
-			
 			// Works because replace the Tile that appears later in the array first
 			if (tiles.members.indexOf(toggle) < tiles.members.indexOf(tile))
 			{
@@ -151,20 +135,6 @@ package
 			{
 				tiles.replace(toggle, tile);
 				tiles.replace(tile, toggle);
-			}
-			
-			FlxG.log("-------");
-			
-			var n:int = rows;
-			for (var i:int = 0; i < n; i++)
-			{
-				var string:String = "";
-				var m:int = columns;
-				for (var j:int = 0; j < m; j++)
-				{
-					string += tileAt(j, i).type;
-				}
-				FlxG.log(string);
 			}
 			
 			toggle.x = tile.x;
@@ -386,17 +356,10 @@ package
 					else
 						var vertical3:Tile = null;
 					
-					// FlxG.log(i + ", " + j);
-					
 					if (horizontal1 && horizontal2 && horizontal3)
 					{
-						// FlxG.log(horizontal1.type + ", " + horizontal2.type + ", " + horizontal3.type);
 						if (horizontal1.type == horizontal2.type && horizontal2.type == horizontal3.type)
 						{
-							// FlxG.log("Horizontal Match");
-//							horizontal1.alpha = 0.5;
-//							horizontal2.alpha = 0.5;
-//							horizontal3.alpha = 0.5;
 							horizontal1.randomize();
 							horizontal2.randomize();
 							horizontal3.randomize();
@@ -405,13 +368,8 @@ package
 					
 					if (vertical1 && vertical2 && vertical3)
 					{
-						// FlxG.log(vertical1.type + ", " + vertical2.type + ", " + vertical3.type);
 						if (vertical1.type == vertical2.type && vertical2.type == vertical3.type)
 						{
-							// FlxG.log("Vertical Match");
-//							vertical1.alpha = 0.5;
-//							vertical2.alpha = 0.5;
-//							vertical3.alpha = 0.5;
 							vertical1.randomize();
 							vertical2.randomize();
 							vertical3.randomize();
