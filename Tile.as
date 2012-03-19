@@ -22,7 +22,7 @@ package
 			super();
 			board = b;
 			type = (Math.random() * (images.length - 1)) + 1;
-			loadGraphic(images[type]);
+			loadGraphic(images[type], true, false, 44, 44);
 			onUp = onClick;
 			fade = false;
 		}
@@ -40,7 +40,7 @@ package
 		{
 			
 			type = pickTile();
-			loadGraphic(images[type]);
+			loadGraphic(images[type], true, false, 44, 44);
 			alpha = 1;
 			fade = false;
 			board.checkBoard();
@@ -49,12 +49,12 @@ package
 		public function randomizeNoCheck():void
 		{
 			type = pickTile();
-			loadGraphic(images[type]);
+			loadGraphic(images[type], true, false, 44, 44);
 		}
 		
 		public function setType(newType:int):void
 		{
-			loadGraphic(images[newType]);
+			loadGraphic(images[newType], true, false, 44, 44);
 			type = newType;
 		}
 		
@@ -68,7 +68,6 @@ package
 		
 		public function fadeOut():void
 		{
-			//this.alpha = 0.5;
 			fade = true;
 		}
 		
@@ -78,8 +77,7 @@ package
 			
 			if (fade)
 			{
-				//this.alpha = 0.5;
-				if(alpha > 0)
+				if (alpha > 0)
 					alpha -= 0.1;
 				else
 					randomize();
