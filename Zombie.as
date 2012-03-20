@@ -13,9 +13,11 @@ package
 		{
 			super();
 			// Loads a graphic of a zombie
-			loadGraphic(ImgZombie);
+			loadGraphic(ImgZombie, true, true, 71, 105);
+			
+			addAnimation("walk", [0, 1, 2, 3, 4, 5, 6], 4, true);
 			//Choose a random speed
-			speed = Math.random() * 15 + 1;
+			speed = Math.random() * 10 + 1;
 			//Makes the y coordinate of the zombie start at the bottom
 			x = -width;
 			y = FlxG.height - height;
@@ -25,6 +27,8 @@ package
 		{
 			//Adds speed to the zombie
 			velocity.x = speed;
+			
+			play("walk");
 			super.update();
 		}
 	}
