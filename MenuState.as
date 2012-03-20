@@ -26,7 +26,7 @@ package {
 			if (FlxG.mouse.justPressed())
 			{
 				FlxG.mouse.hide();
-				FlxG.fade(0xFF990000, 1, onFade);
+				FlxG.fade(0xFF000000, 1, onFade);
 				text.exists = false;
 			}
 		}

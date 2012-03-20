@@ -15,7 +15,6 @@ package
 		public var pauseIMG:Pause;
 		
 		public var pauseButton:FlxButton;
-		public var pauseText:FlxText;
 		public var pause:FlxGroup;
 		
 		public var mainMenuButton:FlxButton;
@@ -41,8 +40,6 @@ package
 			mainMenuButton.loadGraphic(MMButtonIMG, false, false);
 			add(mainMenuButton);
 			
-			pauseText = new FlxText(0, FlxG.height/2, FlxG.width, "Paused!");
-			pauseText.setFormat("", 60, 0xffffffff, "center");
 			pauseButton = new FlxButton();
 			pauseButton.loadGraphic(ImgPause, true, false, 16, 16);
 			pauseButton.x = FlxG.width - pauseButton.width * 2;
@@ -64,8 +61,10 @@ package
 			board.checkBoard();
 			//while (board.checkBoard()){}
 			
+			FlxG.mouse.show();
 			// play BGM
 			FlxG.play(SndMusic);
+			FlxG.flash(0xFF000000, 1);
 		}
 		
 		public function pauseGame():void
@@ -74,13 +73,11 @@ package
 			{
 				FlxG.paused = true;
 				add(pauseIMG);
-				add(pauseText);
 				pause.revive();
 			}
 			else
 			{
 				FlxG.paused = false;
-				remove(pauseText);
 				remove(pauseIMG);
 				pause.alive = false;
 				pause.exists = false;
@@ -100,19 +97,7 @@ package
 			
 			if (FlxG.keys.justPressed("ESCAPE") || FlxG.keys.justPressed("P"))
 			{
-				if (!FlxG.paused)
-				{
-					FlxG.paused = true;
-					add(pauseText);
-					pause.revive();
-				}
-				else
-				{
-					FlxG.paused = false;
-					remove(pauseText);
-					pause.alive = false;
-					pause.exists = false;
-				}
+				pauseGame();
 			}
 			
 			// check collisions

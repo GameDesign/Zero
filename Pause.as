@@ -11,10 +11,10 @@ package
 			super();
 			// Loads a graphic of a pause menu
 			loadGraphic(PauseIMG);
-			y = FlxG.height - height - 50;
+			y = FlxG.height - height;
 		}
 		
-		override public function update():void 
+		override public function update():void
 		{
 			super.update();
 		}
