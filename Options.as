@@ -11,7 +11,7 @@ package
 			var b:FlxButton;
 			
 			t = new FlxText(0, 0, FlxG.width, "Options");
-			t.setFormat("Creeper Pixel", 72, 0xffffffff, "center");
+			t.setFormat("", 72, 0xffffffff, "center");
 			add(t);
 			
 			b = new FlxButton((FlxG.width / 2) - 50, 100, "Credits", credits);

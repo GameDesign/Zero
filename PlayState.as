@@ -42,7 +42,7 @@ package
 			add(mainMenuButton);
 			
 			pauseText = new FlxText(0, FlxG.height/2, FlxG.width, "Paused!");
-			pauseText.setFormat("Creeper Pixel", 60, 0xffffffff, "center");
+			pauseText.setFormat("", 60, 0xffffffff, "center");
 			pauseButton = new FlxButton();
 			pauseButton.loadGraphic(ImgPause, true, false, 16, 16);
 			pauseButton.x = FlxG.width - pauseButton.width * 2;

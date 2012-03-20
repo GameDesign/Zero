@@ -12,7 +12,7 @@ package
 			var b:FlxButton;
 			
 			t = new FlxText(0, 0, FlxG.width, "Credits");
-			t.setFormat("Creeper Pixel", 72, 0xffffffff, "center");
+			t.setFormat("", 72, 0xffffffff, "center");
 			add(t);
 			
 			t = new FlxText(125, 200, FlxG.width, "Designed and Developed By:\nBrandon Kerr\nSpencer Baynton\nNick Schudlo\nTaylor Jackson");

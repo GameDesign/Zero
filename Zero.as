@@ -8,7 +8,7 @@ package
 	{
 		public function Zero()
 		{
-			super(320, 480, MainMenu, 1);
+			super(320, 480, MenuState, 1);
 			forceDebugger = true;
 		}
 	}
