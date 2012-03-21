@@ -12,12 +12,15 @@ package
 		public var board:Board;
 		public var chef:Chef;
 		public var zombies:FlxGroup;
+		public var dishs:FlxGroup;
+		
 		public var pauseIMG:Pause;
 		
 		public var pauseButton:FlxButton;
 		public var pause:FlxGroup;
 		
 		public var mainMenuButton:FlxButton;
+		public var dishButton:FlxButton;
 		
 		// the amount of time played - used for spawning zombies
 		public var elapsedTime:Number;
@@ -35,10 +38,14 @@ package
 			pauseIMG = new Pause();
 			zombies = new FlxGroup();
 			pause = new FlxGroup();
+			dishs = new FlxGroup();
 			
 			mainMenuButton = new FlxButton(5, 5, "", goToMain);
 			mainMenuButton.loadGraphic(MMButtonIMG, false, false);
 			add(mainMenuButton);
+			
+			dishButton = new FlxButton(100, 5, "Dish", throwDish);
+			add(dishButton);
 			
 			pauseButton = new FlxButton();
 			pauseButton.loadGraphic(ImgPause, true, false, 16, 16);
@@ -50,6 +57,7 @@ package
 			// start with first zombie
 			zombies.add(new Zombie());
 			// add all objects to the game
+			add(dishs);
 			add(zombies);
 			add(chef);
 			
@@ -102,6 +110,7 @@ package
 			
 			// check collisions
 			FlxG.collide(zombies, chef, gameOver);
+			FlxG.collide(dishs, zombies, hitZombieWithDish);
 			// if enough time has passed, spawn new zombie
 			elapsedTime += FlxG.elapsed;
 			if (elapsedTime >= spawnTime)
@@ -121,8 +130,19 @@ package
 		
 		public function goToMain()
 		{
-			FlxG.switchState(new MainMenu());
+			FlxG.switchState(new MenuState());
 			super.update(); 
+		}
+		
+		public function throwDish()
+		{
+			dishs.add(new Dish());
+		}
+		
+		public function hitZombieWithDish(Object1:FlxObject, Object2:FlxObject):void
+		{
+			Object1.kill();
+			Object2.kill();
 		}
 	}
 }
