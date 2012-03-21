@@ -225,9 +225,9 @@ package
 
 			//This pass goes through the done board and does something to each tile which contains
 			//a chain
-			for (var row:int = 0; row < rows; row++)
+			for (row = 0; row < rows; row++)
 			{
-				for (var col:int = 0; col < columns; col++)
+				for (col = 0; col < columns; col++)
 				{
 					if (doneBoard[row + 1][col + 1] > -1)
 					{
@@ -385,24 +385,28 @@ package
 					 sets their transparency to 50%
 					 */
 					var horizontal1:Tile = tileAt(i, j);
+					var horizontal2:Tile;
+					var horizontal3:Tile;
 					if (i + 1 < columns)
-						var horizontal2:Tile = tileAt(i + 1, j);
+						horizontal2 = tileAt(i + 1, j);
 					else
-						var horizontal2:Tile = null;
+						horizontal2 = null;
 					if (i + 2 < columns)
-						var horizontal3:Tile = tileAt(i + 2, j);
+						horizontal3 = tileAt(i + 2, j);
 					else
-						var horizontal3:Tile = null;
+						horizontal3 = null;
 					
 					var vertical1:Tile = tileAt(i, j);
+					var vertical2:Tile;
+					var vertical3:Tile;
 					if (j + 1 < rows)
-						var vertical2:Tile = tileAt(i, j + 1);
+						vertical2= tileAt(i, j + 1);
 					else
-						var vertical2:Tile = null;
+						vertical2 = null;
 					if (j + 2 < rows)
-						var vertical3:Tile = tileAt(i, j + 2);
+						vertical3 = tileAt(i, j + 2);
 					else
-						var vertical3:Tile = null;
+						vertical3 = null;
 					
 					if (horizontal1 && horizontal2 && horizontal3)
 					{

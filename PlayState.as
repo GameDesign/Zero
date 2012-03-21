@@ -135,13 +135,13 @@ package
 			//FlxG.switchState(new Shop());
 		}
 		
-		public function goToMain()
+		public function goToMain():void
 		{
 			FlxG.switchState(new MenuState());
 			super.update(); 
 		}
 		
-		public function throwDish()
+		public function throwDish():void
 		{
 			dishs.add(new Dish());
 		}
