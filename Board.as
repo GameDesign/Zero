@@ -18,6 +18,8 @@ package
 		
 		private var matches:int = 0;
 		private var initialBoardCheck:int = 1;
+		private var score:int = 0;
+		private var bowl:int = -1;
 		
 		public function Board() 
 		{
@@ -144,7 +146,11 @@ package
 			tile.y = y;
 			
 			//match();
+			
+			var scoreBefore:int = score;
 			checkBoard();
+			if (scoreBefore < score)
+			bowl = 1;
 			
 			toggle = null;
 		}
@@ -265,6 +271,7 @@ package
 			//If the chain created is long enough, the chain will be copied from tempBoard to doneBoard
 			if (matches >= MINIMUM_MATCHES)
 			{
+				calcScore(matches);
 				copyTempBoard();
 			}
 			
@@ -319,6 +326,47 @@ package
 			for (var row:int = 1; row < 8; row++)
 				for (var col:int = 1; col < 8; col++)
 					clearBoard[row][col] = CLEAR_BOARD;
+		}
+		
+		/**
+		 * Function to check what the score will be for this length of chain
+		 */
+		public function calcScore(chainLength:int):void
+		{
+			var tempScore:int = chainLength;
+			score += 4;
+			tempScore -= 4;
+			while (tempScore > 0)
+			{
+				score += 2;
+				tempScore--;
+			}
+			
+		}
+		
+		/**
+		 * This is a function to check if a bowl needs to be thrown
+		 */
+		public function checkBowl():int 
+		{
+				//If a bowl is lined up, return it
+				if (bowl >= 0)
+				{
+					var temp:int = bowl;
+					bowl = -1;
+					return temp;
+				}
+				//If no bowl is lined up, return -1;
+				else
+					return -1;
+		}
+		
+		/**
+		 * Function to get score
+		 */
+		public function getScore():int
+		{
+			return score;
 		}
 		
 		public function match():void

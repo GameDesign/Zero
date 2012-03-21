@@ -44,8 +44,8 @@ package
 			mainMenuButton.loadGraphic(MMButtonIMG, false, false);
 			add(mainMenuButton);
 			
-			dishButton = new FlxButton(100, 5, "Dish", throwDish);
-			add(dishButton);
+			//dishButton = new FlxButton(100, 5, "Dish", throwDish);
+			//add(dishButton);
 			
 			pauseButton = new FlxButton();
 			pauseButton.loadGraphic(ImgPause, true, false, 16, 16);
@@ -121,6 +121,13 @@ package
 				elapsedTime = 0;
 				spawnTime = FlxG.random() * TIME_SEED;
 			}
+			
+			if (board.checkBowl() > -1)
+				throwDish();
+				
+			
+			board.getScore();//use this score to update the actual score at the top of the screen.
+			
 		}
 		
 		public function gameOver(Object1:FlxObject, Object2:FlxObject):void
