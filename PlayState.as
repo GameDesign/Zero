@@ -123,7 +123,11 @@ package
 			}
 			
 			if (board.checkBowl() > -1)
+			{
+				// do animation and throw dish if chain is made
+				Chef.chopping = true;
 				throwDish();
+			}
 				
 			
 			board.getScore();//use this score to update the actual score at the top of the screen.
