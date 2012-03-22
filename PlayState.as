@@ -43,7 +43,7 @@ package
 			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 30, 30));
 			// Pause button
 			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 30, 30));
-			
+
 			score = new FlxText(0, 2, FlxG.width, "0");
 			score.alignment = "center";
 			score.size = 16;
@@ -126,10 +126,8 @@ package
 				Chef.chopping = true;
 				throwDish();
 			}
-				
-			
+
 			score.text = board.getScore().toString(); //use this score to update the actual score at the top of the screen.
-			
 		}
 		
 		public function gameOver(Object1:FlxObject, Object2:FlxObject):void
