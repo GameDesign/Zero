@@ -186,6 +186,7 @@ package
 				while (checkForChains()) { } //loops until first board has no chains
 				initialBoardCheck = 0;
 				score = 0;
+				bullets = 0;
 			}
 			//Called once a swap has been made, or new tiles have been randomized on the board
 			else
