@@ -11,7 +11,7 @@ package
 		{
 			super();	// calls the flxSprite constructor
 			loadGraphic(ImgChef, true, true, 88, 91); // load graphic
-			addAnimation("chop", [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5], 24, false);
+			addAnimation("chop", [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5], 24, false);
 			x = FlxG.width - width;	// he's on the right
 			y = FlxG.height - height -35;	// put him down on the bottom of the screen but up a bit to set him behind the counter
 			immovable = true;	// obvious

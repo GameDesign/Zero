@@ -6,7 +6,7 @@ package
 	{
 		[Embed(source = "data/zombie.png")] private static var ImgZombie:Class;
 		
-		// vars
+		// Speed of the zombie
 		public var speed:int;
 		
 		public function Zombie()

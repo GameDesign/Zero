@@ -44,8 +44,9 @@ package
 			// Pause button
 			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 30, 30));
 			
-			score = new FlxText(0, 0, FlxG.width, "9999");
+			score = new FlxText(0, 2, FlxG.width, "0");
 			score.alignment = "center";
+			score.size = 16;
 			add(score);
 			
 			//dishButton = new FlxButton(100, 5, "Dish", throwDish);
@@ -127,13 +128,13 @@ package
 			}
 				
 			
-			board.getScore();//use this score to update the actual score at the top of the screen.
+			score.text = board.getScore().toString(); //use this score to update the actual score at the top of the screen.
 			
 		}
 		
 		public function gameOver(Object1:FlxObject, Object2:FlxObject):void
 		{
-			//FlxG.switchState(new Shop());
+			FlxG.switchState(new Shop());
 		}
 		
 		public function goToMain():void
