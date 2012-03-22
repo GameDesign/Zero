@@ -6,20 +6,19 @@ package
 	public class PlayState extends FlxState
 	{
 		[Embed(source="data/music.mp3")] public static var SndMusic:Class;
-		[Embed(source = "data/pause.png")] private static var ImgPause:Class;
-		[Embed(source = "data/mainmenubuttonimage.png")] private static var MMButtonIMG:Class;
+		[Embed(source="data/home.png")] private static var ImgHome:Class;
+		[Embed(source="data/pause.png")] private static var ImgPause:Class;
 		
 		public var board:Board;
 		public var chef:Chef;
 		public var zombies:FlxGroup;
 		public var dishs:FlxGroup;
 		
-		public var pauseIMG:Pause;
+		public var score:FlxText;
 		
-		public var pauseButton:FlxButton;
+		public var pauseIMG:Pause;
 		public var pause:FlxGroup;
 		
-		public var mainMenuButton:FlxButton;
 		public var dishButton:FlxButton;
 		
 		// the amount of time played - used for spawning zombies
@@ -40,19 +39,17 @@ package
 			pause = new FlxGroup();
 			dishs = new FlxGroup();
 			
-			mainMenuButton = new FlxButton(5, 5, "", goToMain);
-			mainMenuButton.loadGraphic(MMButtonIMG, false, false);
-			add(mainMenuButton);
+			// Home button
+			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 30, 30));
+			// Pause button
+			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 30, 30));
+			
+			score = new FlxText(0, 0, FlxG.width, "9999");
+			score.alignment = "center";
+			add(score);
 			
 			//dishButton = new FlxButton(100, 5, "Dish", throwDish);
 			//add(dishButton);
-			
-			pauseButton = new FlxButton();
-			pauseButton.loadGraphic(ImgPause, true, false, 16, 16);
-			pauseButton.x = FlxG.width - pauseButton.width * 2;
-			pauseButton.y = pauseButton.height / 2;
-			pauseButton.onUp = pauseGame;
-			add(pauseButton);
 			
 			// start with first zombie
 			zombies.add(new Zombie());
@@ -71,7 +68,7 @@ package
 			
 			FlxG.mouse.show();
 			// play BGM
-			FlxG.play(SndMusic);
+			//FlxG.play(SndMusic);
 			FlxG.flash(0xFF000000, 1);
 		}
 		
@@ -103,7 +100,7 @@ package
 				pause.update();
 			}
 			
-			if (FlxG.keys.justPressed("ESCAPE") || FlxG.keys.justPressed("P"))
+			if (FlxG.keys.justPressed("P"))
 			{
 				pauseGame();
 			}
@@ -142,7 +139,6 @@ package
 		public function goToMain():void
 		{
 			FlxG.switchState(new MenuState());
-			super.update(); 
 		}
 		
 		public function throwDish():void
