@@ -14,7 +14,8 @@ package
 		public var zombies:FlxGroup;
 		public var dishs:FlxGroup;
 		
-		public var score:FlxText;
+		public var scoreText:FlxText;
+		public var score:int;
 		
 		public var pauseIMG:Pause;
 		public var pause:FlxGroup;
@@ -31,6 +32,7 @@ package
 		{
 			elapsedTime = 0;
 			spawnTime = 5;
+			score = 0;	// For Now - will need to do reading in in the future
 			
 			board = new Board();
 			chef = new Chef();
@@ -44,9 +46,9 @@ package
 			// Pause button
 			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 30, 30));
 			
-			score = new FlxText(0, 0, FlxG.width, "9999");
-			score.alignment = "center";
-			add(score);
+			scoreText = new FlxText(0, 10, FlxG.width, "$" + score.toString());
+			scoreText.alignment = "center";
+			add(scoreText);
 			
 			//dishButton = new FlxButton(100, 5, "Dish", throwDish);
 			//add(dishButton);
@@ -93,6 +95,7 @@ package
 		{
 			if (!FlxG.paused)
 			{
+				scoreText.text = "$" + score.toString();
 				super.update();
 			}
 			else
@@ -123,6 +126,7 @@ package
 			{
 				// do animation and throw dish if chain is made
 				Chef.chopping = true;
+				score += 5;	//TEST - might want somewhere else, want to handle bonuses
 				throwDish();
 			}
 				
