@@ -20,6 +20,8 @@ package
 		private var initialBoardCheck:int = 1;
 		public var score:int = 0;
 		private var bowl:int = -1;
+		private var bullets:int = 0;
+		private var maxBullets:int = 3;
 		
 		public function Board() 
 		{
@@ -315,7 +317,11 @@ package
 			for (var row:int = 1; row < 8; row++)
 				for (var col:int = 1; col < 8; col++)
 					if (tempBoard[row][col] >= 0)
+					{
 						doneBoard[row][col] = tileAt(col - 1, row - 1).type;
+						if (tileAt(col - 1, row - 1).type == BULLET)
+							addBullet();
+					}
 		}
 		
 		/**
@@ -368,6 +374,25 @@ package
 		public function getScore():int
 		{
 			return score;
+		}
+		
+		public function shootBullet():void
+		{
+			bullets--;
+		}
+		
+		public function addBullet():void
+		{
+			if(bullets < maxBullets)
+				bullets++;
+		}
+		
+		/**
+		 * Function to get bullets
+		 */
+		public function getBullets():int
+		{
+			return bullets;
 		}
 		
 		public function match():void
