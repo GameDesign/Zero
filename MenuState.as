@@ -44,7 +44,7 @@ package {
 		
 		public function onFade():void
 		{
-			FlxG.switchState(new PlayState());
+			FlxG.switchState(new StoryState());
 		}
 	}
 }
