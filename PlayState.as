@@ -45,6 +45,7 @@ package
 			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 30, 30));
 			
 			score = new FlxText(0, 0, FlxG.width, "9999");
+			score.size = 18
 			score.alignment = "center";
 			add(score);
 			
@@ -126,8 +127,7 @@ package
 				throwDish();
 			}
 				
-			
-			board.getScore();//use this score to update the actual score at the top of the screen.
+			score.text = board.getScore().toString();//use this score to update the actual score at the top of the screen.
 			
 		}
 		

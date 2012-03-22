@@ -18,7 +18,7 @@ package
 		
 		private var matches:int = 0;
 		private var initialBoardCheck:int = 1;
-		private var score:int = 0;
+		public var score:int = 0;
 		private var bowl:int = -1;
 		
 		public function Board() 
@@ -151,7 +151,7 @@ package
 			checkBoard();
 			if (scoreBefore < score)
 			bowl = 1;
-			
+			FlxG.watch(this, "score");
 			toggle = null;
 		}
 		
@@ -183,6 +183,7 @@ package
 			{
 				while (checkForChains()) { } //loops until first board has no chains
 				initialBoardCheck = 0;
+				score = 0;
 			}
 			//Called once a swap has been made, or new tiles have been randomized on the board
 			else
