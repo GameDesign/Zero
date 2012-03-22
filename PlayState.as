@@ -127,7 +127,7 @@ package
 				throwDish();
 			}
 
-			score.text = board.getScore().toString(); //use this score to update the actual score at the top of the screen.
+			score.text = "$" + board.getScore().toString(); //use this score to update the actual score at the top of the screen.
 		}
 		
 		public function gameOver(Object1:FlxObject, Object2:FlxObject):void
