@@ -20,6 +20,10 @@ package
 		public var pause:FlxGroup;
 		
 		public var dishButton:FlxButton;
+		public var unpauseMenuButton:FlxButton;
+		public var pauseMenuMuteButton:FlxButton;
+		public var pauseMenuVolUp:FlxButton;
+		public var pauseMenuVolDown:FlxButton;
 		
 		// the amount of time played - used for spawning zombies
 		public var elapsedTime:Number;
@@ -38,6 +42,12 @@ package
 			zombies = new FlxGroup();
 			pause = new FlxGroup();
 			dishs = new FlxGroup();
+			
+			unpauseMenuButton = new FlxButton(50, 50, "Hi", pauseGame);
+			pauseMenuMuteButton = new FlxButton(50, 100, "Hi", pauseGame);
+			pauseMenuVolUp = new FlxButton(50, 150, "Hi", pauseGame);
+			pauseMenuVolDown = new FlxButton(50, 200, "H", pauseGame);
+			
 			
 			// Home button
 			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 30, 30));
@@ -78,13 +88,25 @@ package
 			if (!FlxG.paused)
 			{
 				FlxG.paused = true;
+				
 				add(pauseIMG);
+				add(unpauseMenuButton);
+				add(pauseMenuMuteButton);
+				add(pauseMenuVolDown);
+				add(pauseMenuVolUp);
+				
 				pause.revive();
 			}
 			else
 			{
 				FlxG.paused = false;
+				
 				remove(pauseIMG);
+				remove(unpauseMenuButton);
+				remove(pauseMenuMuteButton);
+				remove(pauseMenuVolDown);
+				remove(pauseMenuVolUp);
+				
 				pause.alive = false;
 				pause.exists = false;
 			}
