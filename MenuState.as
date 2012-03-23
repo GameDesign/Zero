@@ -8,7 +8,7 @@ package {
 		
 		public var text:FlxText;
 		public var zombie:FlxSprite;
-		
+		 
 		override public function create():void
 		{
 			add(new FlxSprite(0, 0, ImgTitle));
