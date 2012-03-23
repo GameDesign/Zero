@@ -46,7 +46,7 @@ package
 			unpauseMenuButton = new FlxButton(50, 50, "Hi", pauseGame);
 			pauseMenuMuteButton = new FlxButton(50, 100, "Hi", pauseGame);
 			pauseMenuVolUp = new FlxButton(50, 150, "Hi", pauseGame);
-			pauseMenuVolDown = new FlxButton(50, 200, "H", pauseGame);
+			pauseMenuVolDown = new FlxButton(50, 200, "Hi", pauseGame);
 			 
 			
 			// Home button
@@ -94,7 +94,7 @@ package
 				add(pauseMenuMuteButton);
 				add(pauseMenuVolDown);
 				add(pauseMenuVolUp);
-				
+				super.update(); //in order for buttons to work
 				pause.revive();
 			}
 			else
