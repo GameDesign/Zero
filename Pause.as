@@ -16,7 +16,7 @@ package
 			super();
 			
 			pause = new FlxButton(50, 50, "Pause", doSomething);
-			mute = new FlxButton(50, 100, "Mute", doSomething);
+			mute = new FlxButton(50, 100, "Mute", muteSound);
 			louder = new FlxButton(50, 150, "+", doSomething);
 			quieter = new FlxButton(50, 200, "-", doSomething);
 		
@@ -26,6 +26,12 @@ package
 			add(mute);
 			add(louder);
 			add(quieter);
+		}
+		
+		private function muteSound():void
+		{
+			FlxG.mute = !FlxG.mute;
+			FlxG.log("Mute");
 		}
 		
 		public function doSomething():void
