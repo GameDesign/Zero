@@ -5,9 +5,9 @@ package
 	
 	public class PlayState extends FlxState
 	{
-		[Embed(source="data/music.mp3")] public static var SndMusic:Class;
 		[Embed(source="data/home.png")] private static var ImgHome:Class;
 		[Embed(source="data/pause.png")] private static var ImgPause:Class;
+		[Embed(source="data/music.mp3")] private static var SndMusic:Class;
 		
 		public var board:Board;
 		public var chef:Chef;
@@ -16,14 +16,7 @@ package
 		
 		public var score:FlxText;
 		
-		public var pauseIMG:Pause;
-		public var pause:FlxGroup;
-		
-		public var dishButton:FlxButton;
-		public var unpauseMenuButton:FlxButton;
-		public var pauseMenuMuteButton:FlxButton;
-		public var pauseMenuVolUp:FlxButton;
-		public var pauseMenuVolDown:FlxButton;
+		public var pause:Pause;
 		
 		// the amount of time played - used for spawning zombies
 		public var elapsedTime:Number;
@@ -38,16 +31,10 @@ package
 			
 			board = new Board();
 			chef = new Chef();
-			pauseIMG = new Pause();
+			pause = new Pause();
 			zombies = new FlxGroup();
-			pause = new FlxGroup();
+//			pause = new FlxGroup();
 			dishs = new FlxGroup();
-			
-			unpauseMenuButton = new FlxButton(50, 50, "Hi", pauseGame);
-			pauseMenuMuteButton = new FlxButton(50, 100, "Hi", pauseGame);
-			pauseMenuVolUp = new FlxButton(50, 150, "Hi", pauseGame);
-			pauseMenuVolDown = new FlxButton(50, 200, "Hi", pauseGame);
-			 
 			
 			// Home button
 			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 30, 30));
@@ -58,9 +45,6 @@ package
 			score.alignment = "center";
 			score.size = 16;
 			add(score);
-			
-			//dishButton = new FlxButton(100, 5, "Dish", throwDish);
-			//add(dishButton);
 			
 			// start with first zombie
 			zombies.add(new Zombie());
@@ -89,24 +73,14 @@ package
 			{
 				FlxG.paused = true;
 				
-				add(pauseIMG);
-				add(unpauseMenuButton);
-				add(pauseMenuMuteButton);
-				add(pauseMenuVolDown);
-				add(pauseMenuVolUp);
-				super.update(); //in order for buttons to work
+				add(pause);
+				//super.update(); //in order for buttons to work
 				pause.revive();
 			}
 			else
 			{
 				FlxG.paused = false;
-				
-				remove(pauseIMG);
-				remove(unpauseMenuButton);
-				remove(pauseMenuMuteButton);
-				remove(pauseMenuVolDown);
-				remove(pauseMenuVolUp);
-				
+				remove(pause);
 				pause.alive = false;
 				pause.exists = false;
 			}
