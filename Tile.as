@@ -36,6 +36,9 @@ package
 			
 			onUp = toggle;
 			
+			x = column * width;
+			y = row * height - FlxG.height;
+			
 			// flagged for removal
 			fade = false;
 		}

@@ -53,11 +53,7 @@ package
 				var m:int = rows;
 				for (var j:int = 0; j < m; j++)
 				{
-					var tile:Tile = new Tile(this, i, j);
-					
-					tile.y = (tile.height + 2) * i + 30;
-					tile.x = (tile.width + 2) * j;
-					tiles.add(tile);
+					tiles.add(new Tile(this, i, j));
 				}
 			}
 		}

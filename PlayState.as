@@ -55,10 +55,9 @@ package
 			// this would need to be called after swaps and and replacing tiles
 			board.checkBoard();
 			
-			FlxG.mouse.show();
-			// play BGM
-			FlxG.play(SndMusic);
 			FlxG.flash(0xFF000000, 1);
+			FlxG.mouse.show();
+			FlxG.play(SndMusic);
 		}
 		
 		public function pauseGame():void
