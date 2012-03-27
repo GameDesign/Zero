@@ -8,11 +8,13 @@ package
 		[Embed(source = "data/arm.png")] private static var ImgArm:Class;
 		[Embed(source = "data/bullet.png")] private static var ImgBullet:Class;
 		[Embed(source = "data/brain.png")] private static var ImgBrain:Class;
+		[Embed(source = "data/eyeball.png")] private static var ImgEyeball:Class;
 		[Embed(source = "data/foot.png")] private static var ImgFoot:Class;
 		[Embed(source = "data/heart.png")] private static var ImgHeart:Class;
+		[Embed(source = "data/intestines.png")] private static var ImgIntestines:Class;
 		[Embed(source = "data/stomach.png")] private static var ImgStomach:Class;
 		
-		private var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHeart, ImgArm, ImgStomach);
+		private var images:Array = new Array(ImgBullet, ImgArm, ImgBrain, ImgEyeball, ImgFoot, ImgHeart, ImgIntestines, ImgStomach);
 		public var board:Board;
 		
 		// flagged for removal
@@ -86,7 +88,7 @@ package
 		{
 			on = !on;
 			
-			for each(var tile:Tile in board.tiles.members)
+			for each(var tile:Tile in board.members)
 			{
 				if (tile.on && tile != this)
 				{

@@ -50,7 +50,7 @@ package
 			add(chef);
 			
 			// because tiles is a FlxGroup it can be used to add all the tiles to the game
-			add(board.tiles);
+			add(board);
 			
 			// this would need to be called after swaps and and replacing tiles
 			board.checkBoard();

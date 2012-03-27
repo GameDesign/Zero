@@ -2,11 +2,10 @@ package
 {
 	import org.flixel.*;
 	
-	public class Board
+	public class Board extends FlxGroup
 	{
 		public var columns:int;
 		public var rows:int;
-		public var tiles:FlxGroup;
 		
 		private var doneBoard:Array = new Array(9);
 		private var tempBoard:Array = new Array(9);
@@ -45,7 +44,6 @@ package
 			//This section adds random tiles to the flxGroup of tiles
 			columns = 7;
 			rows = 7;
-			tiles = new FlxGroup();
 			
 			var n:int = columns;
 			for (var i:int = 0; i < n; i++)
@@ -53,7 +51,7 @@ package
 				var m:int = rows;
 				for (var j:int = 0; j < m; j++)
 				{
-					tiles.add(new Tile(this, i, j));
+					add(new Tile(this, i, j));
 				}
 			}
 		}
@@ -72,21 +70,21 @@ package
 			tile.row ^= adjacent.row;
 			
 			// Works because replace the Tile that appears later in the array first
-			if (tiles.members.indexOf(adjacent) < tiles.members.indexOf(tile))
+			if (members.indexOf(adjacent) < members.indexOf(tile))
 			{
-				tiles.replace(tile, adjacent);
-				tiles.replace(adjacent, tile);
+				replace(tile, adjacent);
+				replace(adjacent, tile);
 			}
 			else
 			{
-				tiles.replace(adjacent, tile);
-				tiles.replace(tile, adjacent);
+				replace(adjacent, tile);
+				replace(tile, adjacent);
 			}
 			
 			var scoreBefore:int = score;
 			checkBoard();
 			if (scoreBefore < score)
-			bowl = 1;
+				bowl = 1;
 		}
 		
 		public function tileAt(column:int, row:int):Tile
@@ -96,7 +94,12 @@ package
 			 to find a tile at (3,3) would be at index 24 in the array
 			 (0,0) is 0 and (6,6) is 48
 			 */
-			return tiles.members[(row + 1) * rows - (columns - (column))];
+			//return tiles.members[(row + 1) * rows - (columns - (column))];
+			
+			for each (var tile:Tile in members)
+				if (tile.column == column && tile.row == row)
+					return tile;
+			return null;
 		}
 		
 		/**
@@ -125,9 +128,9 @@ package
 			{
 				var fading:Boolean = false;
 				//If any tiles are still fading, the 'fading' boolean will be set to true
-				for (var index:int = 0; index < tiles.length; index++)
+				for (var index:int = 0; index < length; index++)
 				{
-					if (tiles.members[index].fade == true)
+					if (members[index].fade == true)
 						fading = true;
 				}
 				
