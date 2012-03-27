@@ -12,14 +12,16 @@ package
 		[Embed(source = "data/heart.png")] private static var ImgHeart:Class;
 		[Embed(source = "data/stomach.png")] private static var ImgStomach:Class;
 		
+		private var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHeart, ImgArm, ImgStomach);
 		public var board:Board;
-		public var type:int;
-		public var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHeart, ImgArm, ImgStomach);
+		
+		// flagged for removal
 		public var fade:Boolean;
 		private var BULLET_PROBABILITY:int = 200;
 		
 		public var column:uint;
 		public var row:uint;
+		public var type:int;
 		
 		public function Tile(b:Board, Column:uint, Row:uint)
 		{
@@ -29,9 +31,12 @@ package
 			column = Column;
 			row = Row;
 			
-			type = (Math.random() * (images.length - 1)) + 1;
+			type = (FlxG.random() * (images.length - 1)) + 1;
 			loadGraphic(images[type], true, false, 44, 44);
-			onUp = onClick;
+			
+			onUp = toggle;
+			
+			// flagged for removal
 			fade = false;
 		}
 		
@@ -46,7 +51,6 @@ package
 		
 		public function randomize():void
 		{
-			
 			type = pickTile();
 			loadGraphic(images[type], true, false, 44, 44);
 			alpha = 1;
@@ -60,13 +64,14 @@ package
 			loadGraphic(images[type], true, false, 44, 44);
 		}
 		
+		// flagged for removal
 		public function setType(newType:int):void
 		{
 			loadGraphic(images[newType], true, false, 44, 44);
 			type = newType;
 		}
 		
-		public function onClick():void
+		public function toggle():void
 		{
 			on = !on;
 			if (!board.toggle)
@@ -78,6 +83,7 @@ package
 			}
 		}
 		
+		// flagged for removal
 		public function fadeOut():void
 		{
 			fade = true;
@@ -99,6 +105,7 @@ package
 				FlxVelocity.moveTowardsPoint(this, location, 1, 250);
 			}
 			
+			// flagged for removal
 			if (fade)
 			{
 				if (alpha > 0)
