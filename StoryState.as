@@ -10,9 +10,6 @@ package
 		
 		override public function create():void
 		{
-			FlxG.flash(0xFF000000, 5);
-			FlxG.mouse.show();
-			
 			text = new FlxText(0, 0, FlxG.width, "Click to Skip");
 			text.alignment = "center";
 			text.size = 12;
@@ -23,6 +20,8 @@ package
 			crawl.velocity.y = -11;
 			add(crawl);
 			
+			FlxG.flash(0xFF000000, 5);
+			FlxG.mouse.show();
 		}
 		
 		override public function update():void
