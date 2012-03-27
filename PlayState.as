@@ -8,6 +8,9 @@ package
 		[Embed(source="data/pause.png")] private static var ImgPause:Class;
 		[Embed(source="data/music.mp3")] private static var SndMusic:Class;
 		
+		private static var COLUMNS:uint = 7;
+		private static var ROWS:uint = 7;
+		
 		public var board:Board;
 		public var chef:Chef;
 		public var dishs:FlxGroup;
@@ -26,7 +29,6 @@ package
 			elapsedTime = 0;
 			spawnTime = 5;
 			
-			board = new Board();
 			chef = new Chef();
 			pause = new Pause();
 			zombies = new FlxGroup();
@@ -49,9 +51,8 @@ package
 			add(zombies);
 			add(chef);
 			
-			// because tiles is a FlxGroup it can be used to add all the tiles to the game
+			board = new Board(COLUMNS, ROWS);
 			add(board);
-			
 			// this would need to be called after swaps and and replacing tiles
 			board.checkBoard();
 			

@@ -4,8 +4,8 @@ package
 	
 	public class Board extends FlxGroup
 	{
-		public var columns:int;
-		public var rows:int;
+		public var columns:uint;
+		public var rows:uint;
 		
 		private var doneBoard:Array = new Array(9);
 		private var tempBoard:Array = new Array(9);
@@ -21,8 +21,10 @@ package
 		private var bullets:int = 0;
 		private var maxBullets:int = 3;
 		
-		public function Board() 
+		public function Board(Columns:uint, Rows:uint) 
 		{
+			columns = Columns;
+			rows = Rows;
 			
 			//Initialize the game board, done board, and temp board
 			for (var row:int = 0; row < BOARD_SIZE_BORDER; row++)
@@ -40,10 +42,6 @@ package
 					tempBoard[row][col] = CLEAR_BOARD;
 				}
 			}
-			
-			//This section adds random tiles to the flxGroup of tiles
-			columns = 7;
-			rows = 7;
 			
 			var n:int = columns;
 			for (var i:int = 0; i < n; i++)
@@ -184,7 +182,6 @@ package
 			
 			return match;
 		}
-		
 		
 		/**
 		 * function to check if a specific board tile is part of a chain. First a check is

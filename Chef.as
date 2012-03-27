@@ -9,7 +9,7 @@ package
 		
 		public function Chef()
 		{
-			super();	// calls the flxSprite constructor
+			super();
 			loadGraphic(ImgChef, true, true, 88, 91); // load graphic
 			addAnimation("chop", [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5], 24, false);
 			x = FlxG.width - width;	// he's on the right
