@@ -1,26 +1,34 @@
 package
 {
 	import org.flixel.*;
+	import org.flixel.plugin.photonstorm.*;
 	
 	public class Tile extends FlxButton
 	{
+		[Embed(source = "data/arm.png")] private static var ImgArm:Class;
 		[Embed(source = "data/bullet.png")] private static var ImgBullet:Class;
 		[Embed(source = "data/brain.png")] private static var ImgBrain:Class;
 		[Embed(source = "data/foot.png")] private static var ImgFoot:Class;
-		[Embed(source = "data/hand.png")] private static var ImgHand:Class;
 		[Embed(source = "data/heart.png")] private static var ImgHeart:Class;
 		[Embed(source = "data/stomach.png")] private static var ImgStomach:Class;
 		
 		public var board:Board;
 		public var type:int;
-		public var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHand, ImgHeart, ImgStomach);
+		public var images:Array = new Array(ImgBullet, ImgBrain, ImgFoot, ImgHeart, ImgArm, ImgStomach);
 		public var fade:Boolean;
 		private var BULLET_PROBABILITY:int = 200;
 		
-		public function Tile(b:Board)
+		public var column:uint;
+		public var row:uint;
+		
+		public function Tile(b:Board, Column:uint, Row:uint)
 		{
 			super();
+			
 			board = b;
+			column = Column;
+			row = Row;
+			
 			type = (Math.random() * (images.length - 1)) + 1;
 			loadGraphic(images[type], true, false, 44, 44);
 			onUp = onClick;
@@ -60,10 +68,14 @@ package
 		
 		public function onClick():void
 		{
+			on = !on;
 			if (!board.toggle)
 				board.toggle = this;
 			else
-				board.swap(this);
+			{
+				if (this != board.toggle)
+					board.swap(this);
+			}
 		}
 		
 		public function fadeOut():void
@@ -74,6 +86,18 @@ package
 		override public function update():void
 		{
 			super.update();
+			
+			if (on)
+				frame = PRESSED;
+			
+			var location:FlxPoint = new FlxPoint(column * width, row * height + FlxG.height / 15);
+			
+			if (x != location.x || y != location.y)
+			{
+				location.x += width / 2;
+				location.y += height / 2;
+				FlxVelocity.moveTowardsPoint(this, location, 1, 250);
+			}
 			
 			if (fade)
 			{

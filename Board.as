@@ -54,7 +54,7 @@ package
 				var m:int = rows;
 				for (var j:int = 0; j < m; j++)
 				{
-					var tile:Tile = new Tile(this);
+					var tile:Tile = new Tile(this, i, j);
 					
 					tile.y = (tile.height + 2) * i + 30;
 					tile.x = (tile.width + 2) * j;
@@ -122,12 +122,10 @@ package
 		
 		public function swap(tile:Tile):void
 		{
+			tile.on = toggle.on = false;
+			
 			if (!toggle)
 				return;
-			
-			// temp tile didn't work
-			var x:int = toggle.x;
-			var y:int = toggle.y;
 			
 			// Works because replace the Tile that appears later in the array first
 			if (tiles.members.indexOf(toggle) < tiles.members.indexOf(tile))
@@ -141,11 +139,16 @@ package
 				tiles.replace(tile, toggle);
 			}
 			
-			toggle.x = tile.x;
-			toggle.y = tile.y;
-			
-			tile.x = x;
-			tile.y = y;
+			// untoggle
+			toggle.on = tile.on = false;
+			// swap column (XOR Swap Algorithm)
+			tile.column ^= toggle.column;
+			toggle.column ^= tile.column;
+			tile.column ^= toggle.column;
+			// swap row (XOR Swap Algorithm)
+			tile.row ^= toggle.row;
+			toggle.row ^= tile.row;
+			tile.row ^= toggle.row;
 			
 			//match();
 			
@@ -153,7 +156,6 @@ package
 			checkBoard();
 			if (scoreBefore < score)
 			bowl = 1;
-			FlxG.watch(this, "score");
 			toggle = null;
 		}
 		

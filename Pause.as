@@ -32,6 +32,7 @@ package
 		{
 			FlxG.mute = !FlxG.mute;
 			FlxG.log("Mute");
+			FlxG.paused = true;
 		}
 		
 		public function doSomething():void

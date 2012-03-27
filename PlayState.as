@@ -63,7 +63,7 @@ package
 			
 			FlxG.mouse.show();
 			// play BGM
-			//FlxG.play(SndMusic);
+			FlxG.play(SndMusic);
 			FlxG.flash(0xFF000000, 1);
 		}
 		
