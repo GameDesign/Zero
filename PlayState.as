@@ -15,7 +15,6 @@ package
 		public var dishs:FlxGroup;
 		
 		public var score:FlxText;
-		
 		public var pause:Pause;
 		
 		// the amount of time played - used for spawning zombies
@@ -33,7 +32,6 @@ package
 			chef = new Chef();
 			pause = new Pause();
 			zombies = new FlxGroup();
-//			pause = new FlxGroup();
 			dishs = new FlxGroup();
 			
 			// Home button
@@ -57,9 +55,7 @@ package
 			add(board.tiles);
 			
 			// this would need to be called after swaps and and replacing tiles
-			//zboard.match();
 			board.checkBoard();
-			//while (board.checkBoard()){}
 			
 			FlxG.mouse.show();
 			// play BGM

@@ -71,15 +71,27 @@ package
 			type = newType;
 		}
 		
+		public function isAdjacent(tile:Tile):Boolean
+		{
+			var deltaRow = FlxU.abs(tile.row - row);
+			var deltaColumn = FlxU.abs(tile.column - column);
+			
+			return deltaRow < 2 && deltaColumn < 2 && deltaRow != deltaColumn;
+		}
+		
 		public function toggle():void
 		{
 			on = !on;
-			if (!board.toggle)
-				board.toggle = this;
-			else
+			
+			for each(var tile:Tile in board.tiles.members)
 			{
-				if (this != board.toggle)
-					board.swap(this);
+				if (tile.on && tile != this)
+				{
+					if (isAdjacent(tile))
+						board.swap(this, tile);
+					else
+						tile.on = false;
+				}
 			}
 		}
 		
@@ -102,7 +114,7 @@ package
 			{
 				location.x += width / 2;
 				location.y += height / 2;
-				FlxVelocity.moveTowardsPoint(this, location, 1, 250);
+				FlxVelocity.moveTowardsPoint(this, location, 1, 100);
 			}
 			
 			// flagged for removal

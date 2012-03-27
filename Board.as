@@ -7,7 +7,6 @@ package
 		public var columns:int;
 		public var rows:int;
 		public var tiles:FlxGroup;
-		public var toggle:Tile;
 		
 		private var doneBoard:Array = new Array(9);
 		private var tempBoard:Array = new Array(9);
@@ -61,102 +60,37 @@ package
 					tiles.add(tile);
 				}
 			}
-			/*
-			tiles.members[0].setType(0);
-			tiles.members[1].setType(5);
-			tiles.members[2].setType(5);
-			tiles.members[3].setType(1);
-			tiles.members[4].setType(2);
-			tiles.members[5].setType(4);
-			tiles.members[6].setType(4);
-			
-			tiles.members[7].setType(3);
-			tiles.members[8].setType(5);
-			tiles.members[9].setType(3);
-			tiles.members[10].setType(0);
-			tiles.members[11].setType(3);
-			tiles.members[12].setType(0);
-			tiles.members[13].setType(2);
-			
-			tiles.members[14].setType(3);
-			tiles.members[15].setType(0);
-			tiles.members[16].setType(5);
-			tiles.members[17].setType(3);
-			tiles.members[18].setType(5);
-			tiles.members[19].setType(4);
-			tiles.members[20].setType(0);
-			
-			tiles.members[21].setType(0);
-			tiles.members[22].setType(2);
-			tiles.members[23].setType(2);
-			tiles.members[24].setType(4);
-			tiles.members[25].setType(0);
-			tiles.members[26].setType(2);
-			tiles.members[27].setType(5);
-			
-			tiles.members[28].setType(2);
-			tiles.members[29].setType(2);
-			tiles.members[30].setType(0);
-			tiles.members[31].setType(4);
-			tiles.members[32].setType(2);
-			tiles.members[33].setType(0);
-			tiles.members[34].setType(4);
-		
-			tiles.members[35].setType(2);
-			tiles.members[36].setType(3);
-			tiles.members[37].setType(0);
-			tiles.members[38].setType(2);
-			tiles.members[39].setType(3);
-			tiles.members[40].setType(4);
-			tiles.members[41].setType(3);
-			
-			tiles.members[42].setType(1);
-			tiles.members[43].setType(0);
-			tiles.members[44].setType(2);
-			tiles.members[45].setType(0);
-			tiles.members[46].setType(4);
-			tiles.members[47].setType(5);
-			tiles.members[48].setType(3);
-			*/
 		}
 		
-		public function swap(tile:Tile):void
+		public function swap(tile:Tile, adjacent:Tile):void
 		{
-			tile.on = toggle.on = false;
-			
-			if (!toggle)
-				return;
+			// untoggle
+			adjacent.on = tile.on =  false;
+			// swap column (XOR Swap Algorithm)
+			tile.column ^= adjacent.column;
+			adjacent.column ^= tile.column;
+			tile.column ^= adjacent.column;
+			// swap row (XOR Swap Algorithm)
+			tile.row ^= adjacent.row;
+			adjacent.row ^= tile.row;
+			tile.row ^= adjacent.row;
 			
 			// Works because replace the Tile that appears later in the array first
-			if (tiles.members.indexOf(toggle) < tiles.members.indexOf(tile))
+			if (tiles.members.indexOf(adjacent) < tiles.members.indexOf(tile))
 			{
-				tiles.replace(tile, toggle);
-				tiles.replace(toggle, tile);
+				tiles.replace(tile, adjacent);
+				tiles.replace(adjacent, tile);
 			}
 			else
 			{
-				tiles.replace(toggle, tile);
-				tiles.replace(tile, toggle);
+				tiles.replace(adjacent, tile);
+				tiles.replace(tile, adjacent);
 			}
-			
-			// untoggle
-			toggle.on = tile.on = false;
-			// swap column (XOR Swap Algorithm)
-			tile.column ^= toggle.column;
-			toggle.column ^= tile.column;
-			tile.column ^= toggle.column;
-			// swap row (XOR Swap Algorithm)
-			tile.row ^= toggle.row;
-			toggle.row ^= tile.row;
-			tile.row ^= toggle.row;
-			
-			//match();
 			
 			var scoreBefore:int = score;
 			checkBoard();
 			if (scoreBefore < score)
 			bowl = 1;
-			toggle = null;
 		}
 		
 		public function tileAt(column:int, row:int):Tile
@@ -396,68 +330,6 @@ package
 		public function getBullets():int
 		{
 			return bullets;
-		}
-		
-		public function match():void
-		{
-			var n:int = columns;
-			for (var i:int = 0; i < n; i++)
-			{
-				var m:int = rows;
-				for (var j:int = 0; j < m; j++)
-				{
-					// There has to be a cleaner was to do this!
-					
-					/*
-					 checks the three tiles horizontally and vertically
-					 to see if they have the same type and if they do
-					 sets their transparency to 50%
-					 */
-					var horizontal1:Tile = tileAt(i, j);
-					var horizontal2:Tile;
-					var horizontal3:Tile;
-					if (i + 1 < columns)
-						horizontal2 = tileAt(i + 1, j);
-					else
-						horizontal2 = null;
-					if (i + 2 < columns)
-						horizontal3 = tileAt(i + 2, j);
-					else
-						horizontal3 = null;
-					
-					var vertical1:Tile = tileAt(i, j);
-					var vertical2:Tile;
-					var vertical3:Tile;
-					if (j + 1 < rows)
-						vertical2= tileAt(i, j + 1);
-					else
-						vertical2 = null;
-					if (j + 2 < rows)
-						vertical3 = tileAt(i, j + 2);
-					else
-						vertical3 = null;
-					
-					if (horizontal1 && horizontal2 && horizontal3)
-					{
-						if (horizontal1.type == horizontal2.type && horizontal2.type == horizontal3.type)
-						{
-							horizontal1.randomize();
-							horizontal2.randomize();
-							horizontal3.randomize();
-						}
-					}
-					
-					if (vertical1 && vertical2 && vertical3)
-					{
-						if (vertical1.type == vertical2.type && vertical2.type == vertical3.type)
-						{
-							vertical1.randomize();
-							vertical2.randomize();
-							vertical3.randomize();
-						}
-					}
-				}
-			}
 		}
 	}
 }
