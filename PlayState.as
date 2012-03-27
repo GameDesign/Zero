@@ -1,6 +1,5 @@
 package
 {
-	import flash.display.PixelSnapping;
 	import org.flixel.*;
 	
 	public class PlayState extends FlxState
@@ -11,11 +10,10 @@ package
 		
 		public var board:Board;
 		public var chef:Chef;
-		public var zombies:FlxGroup;
 		public var dishs:FlxGroup;
-		
-		public var score:FlxText;
 		public var pause:Pause;
+		public var score:FlxText;
+		public var zombies:FlxGroup;
 		
 		// the amount of time played - used for spawning zombies
 		public var elapsedTime:Number;
@@ -34,15 +32,15 @@ package
 			zombies = new FlxGroup();
 			dishs = new FlxGroup();
 			
-			// Home button
-			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 30, 30));
-			// Pause button
-			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 30, 30));
-
 			score = new FlxText(0, 2, FlxG.width, "0");
 			score.alignment = "center";
 			score.size = 16;
 			add(score);
+			
+			// Home button
+			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 30, 30));
+			// Pause button
+			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 30, 30));
 			
 			// start with first zombie
 			zombies.add(new Zombie());
