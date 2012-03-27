@@ -1,6 +1,7 @@
 package
 {
 	import org.flixel.*;
+	import org.flixel.plugin.photonstorm.FlxDelay;
 	
 	public class PlayState extends FlxState
 	{
@@ -17,9 +18,13 @@ package
 		public var pause:Pause;
 		public var score:FlxText;
 		public var zombies:FlxGroup;
+		public var timer:FlxDelay;
 		
 		// the amount of time played - used for spawning zombies
 		public var elapsedTime:Number;
+		// speed to pass into zombie on construction
+		public var zombieSpeedScalar:Number = 1;
+		
 		// the time to wait until next spawn
 		public var spawnTime:Number;
 		public const TIME_SEED:int = 12;
@@ -28,6 +33,9 @@ package
 		{
 			elapsedTime = 0;
 			spawnTime = 5;
+			// start timer for zombie spawn delay
+			timer = new FlxDelay(8000);
+			timer.start();
 			
 			chef = new Chef();
 			pause = new Pause();
@@ -45,7 +53,7 @@ package
 			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 30, 30));
 			
 			// start with first zombie
-			zombies.add(new Zombie());
+			zombies.add(new Zombie(zombieSpeedScalar));
 			// add all objects to the game
 			add(dishs);
 			add(zombies);
@@ -100,14 +108,20 @@ package
 			FlxG.collide(zombies, chef, gameOver);
 			FlxG.collide(dishs, zombies, hitZombieWithDish);
 			// if enough time has passed, spawn new zombie
-			elapsedTime += FlxG.elapsed;
-			if (elapsedTime >= spawnTime)
+			elapsedTime += FlxG.elapsed;			
+			//if (elapsedTime >= spawnTime)
+			if (timer.hasExpired)
 			{
-				zombies.add(new Zombie());
+				zombieSpeedScalar += 0.2;
+				zombies.add(new Zombie(zombieSpeedScalar));
 				add(zombies);
+				// reset timer
+				timer.start();
+				/*
 				// reset timer
 				elapsedTime = 0;
 				spawnTime = FlxG.random() * TIME_SEED;
+				*/
 			}
 			
 			if (board.checkBowl() > -1)

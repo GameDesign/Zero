@@ -15,6 +15,8 @@ package
 			x = FlxG.width - width;	// he's on the right
 			y = FlxG.height - height -35;	// put him down on the bottom of the screen but up a bit to set him behind the counter
 			immovable = true;	// obvious
+			width = 70;
+			offset.x = frameWidth - width;
 		}
 		
 		override public function update():void
