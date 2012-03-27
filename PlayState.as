@@ -19,11 +19,14 @@ package
 		public var score:FlxText;
 		public var zombies:FlxGroup;
 		public var timer:FlxDelay;
+		public var zomebieSpawnDelay:int = 5000;	// time in MS for how long to delay zombie spawning	
 		
 		// the amount of time played - used for spawning zombies
 		public var elapsedTime:Number;
 		// speed to pass into zombie on construction
-		public var zombieSpeedScalar:Number = 1;
+		public var zombieSpeedScalar:Number = 10;
+		// counter for how many zombies have been brought it
+		public var zombieCounter:int = 0;
 		
 		// the time to wait until next spawn
 		public var spawnTime:Number;
@@ -34,7 +37,7 @@ package
 			elapsedTime = 0;
 			spawnTime = 5;
 			// start timer for zombie spawn delay
-			timer = new FlxDelay(8000);
+			timer = new FlxDelay(zomebieSpawnDelay);
 			timer.start();
 			
 			chef = new Chef();
@@ -107,22 +110,37 @@ package
 			// check collisions
 			FlxG.collide(zombies, chef, gameOver);
 			FlxG.collide(dishs, zombies, hitZombieWithDish);
-			// if enough time has passed, spawn new zombie
-			elapsedTime += FlxG.elapsed;			
-			//if (elapsedTime >= spawnTime)
+// if enough time has passed, spawn new zombie
+//elapsedTime += FlxG.elapsed;			
+//if (elapsedTime >= spawnTime)
 			if (timer.hasExpired)
 			{
-				zombieSpeedScalar += 0.2;
+				zombieSpeedScalar += 0.3;
 				zombies.add(new Zombie(zombieSpeedScalar));
 				add(zombies);
+				zombieCounter++;
 				// reset timer
+				if (zombieCounter < 20)
+					zomebieSpawnDelay = 5000;
+				else if (zombieCounter < 30)
+					zomebieSpawnDelay = 4500;
+				else if (zombieCounter < 40)
+					zomebieSpawnDelay = 4000;
+				else if (zombieCounter < 50)
+					zomebieSpawnDelay = 3500;
+				else	
+					zomebieSpawnDelay = 3000;
+					
+				FlxG.watch(this, "zombieCounter");
+				timer.duration = zomebieSpawnDelay;
 				timer.start();
-				/*
-				// reset timer
-				elapsedTime = 0;
-				spawnTime = FlxG.random() * TIME_SEED;
-				*/
+/*
+// reset timer
+elapsedTime = 0;
+spawnTime = FlxG.random() * TIME_SEED;
+*/
 			}
+			
 			
 			if (board.checkBowl() > -1)
 			{

@@ -19,8 +19,10 @@ package
 			loadGraphic(ImgZombie, true, true, 71, 105);
 			
 			addAnimation("walk", [0, 1, 2, 3, 4, 5, 6], 4, true);
-			// Choose a random speed using the scalar
-			speed = Math.random() * 5 + speedScalar;
+// Choose a random speed using the scalar
+//speed = Math.random() * 5 + speedScalar;
+			// set the speed
+			speed = speedScalar;
 			// Makes the y coordinate of the zombie start at the bottom
 			x = -width;
 			y = FlxG.height - height;
