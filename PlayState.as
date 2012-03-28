@@ -7,7 +7,8 @@ package
 	{
 		[Embed(source="data/home.png")] private static var ImgHome:Class;
 		[Embed(source="data/pause.png")] private static var ImgPause:Class;
-		[Embed(source="data/music.mp3")] private static var SndMusic:Class;
+		[Embed(source = "data/music.mp3")] private static var SndMusic:Class;
+		[Embed(source = "data/invisChef.png")] private static var ImgChefButton:Class;
 		
 		private static var COLUMNS:uint = 7;
 		private static var ROWS:uint = 7;
@@ -54,7 +55,7 @@ package
 			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 30, 30));
 			// Pause button
 			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 30, 30));
-			
+			add(new FlxButton(FlxG.width - 91, FlxG.height - 131, null, throwDishChefClick).loadGraphic(ImgChefButton, false, false, 91, 91));
 			// start with first zombie
 			zombies.add(new Zombie(zombieSpeedScalar));
 			// add all objects to the game
@@ -171,6 +172,15 @@ spawnTime = FlxG.random() * TIME_SEED;
 		{
 			Object1.kill();
 			Object2.kill();
+		}
+		
+		public function throwDishChefClick()
+		{
+			if (board.getBullets() > 0)
+			{
+				throwDish();
+				board.shootBullet();
+			}
 		}
 	}
 }
