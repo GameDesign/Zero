@@ -42,6 +42,9 @@ package
 			timer = new FlxDelay(zomebieSpawnDelay);
 			timer.start();
 			
+			// background image
+			add(new FlxSprite(0, 0, null).loadGraphic(ImgBG, false, false, 320, 480));
+			
 			chef = new Chef();
 			pause = new Pause();
 			zombies = new FlxGroup();
@@ -51,9 +54,7 @@ package
 			score.alignment = "center";
 			score.size = 16;
 			add(score);
-			
-			// background image
-			add(new FlxSprite(0, 0, null).loadGraphic(ImgBG, false, false, 320, 480)); 
+			 
 			// Home button
 			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 30, 30));
 			// Pause button
