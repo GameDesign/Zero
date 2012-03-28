@@ -9,6 +9,7 @@ package
 		[Embed(source="data/pause.png")] private static var ImgPause:Class;
 		[Embed(source = "data/music.mp3")] private static var SndMusic:Class;
 		[Embed(source = "data/invisChef.png")] private static var ImgChefButton:Class;
+		[Embed(source = "data/bg.png")] private static var ImgBG:Class;		
 		
 		private static var COLUMNS:uint = 7;
 		private static var ROWS:uint = 7;
@@ -51,6 +52,8 @@ package
 			score.size = 16;
 			add(score);
 			
+			// background image
+			add(new FlxSprite(0, 0, null).loadGraphic(ImgBG, false, false, 320, 480)); 
 			// Home button
 			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 30, 30));
 			// Pause button
