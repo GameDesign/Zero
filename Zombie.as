@@ -10,11 +10,10 @@ package
 		// Speed of the zombie
 		public var speed:int;
 		
-		
-		
 		public function Zombie(speedScalar:Number)
 		{
 			super();
+			
 			// Loads a graphic of a zombie
 			loadGraphic(ImgZombie, true, true, 71, 105);
 			
