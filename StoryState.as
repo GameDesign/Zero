@@ -38,7 +38,7 @@ package
 		
 		public function skip():void
 		{
-			FlxG.mouse.hide();
+			//FlxG.mouse.hide();
 			FlxG.switchState(new PlayState());
 		}
 	}

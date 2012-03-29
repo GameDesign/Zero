@@ -30,14 +30,12 @@ package
 			for (var row:int = 0; row < BOARD_SIZE_BORDER; row++)
 			{
 				//Create the second dimensions for each array
-				//board[row] = new Array(BOARD_SIZE_BORDER);
 				doneBoard[row] = new Array(BOARD_SIZE_BORDER);
 				tempBoard[row] = new Array(BOARD_SIZE_BORDER);
 				
 				//Initialize each array
 				for (var col:int = 0; col < BOARD_SIZE_BORDER; col++)
 				{
-					//board[row][col] = CLEAR_BOARD;
 					doneBoard[row][col] = CLEAR_BOARD;
 					tempBoard[row][col] = CLEAR_BOARD;
 				}
@@ -87,11 +85,6 @@ package
 		
 		public function tileAt(column:int, row:int):Tile
 		{
-			/*
-			 members is a one dimensional array within the FlxGroup
-			 to find a tile at (3,3) would be at index 24 in the array
-			 (0,0) is 0 and (6,6) is 48
-			 */
 			//return tiles.members[(row + 1) * rows - (columns - (column))];
 			
 			for each (var tile:Tile in members)
@@ -126,9 +119,10 @@ package
 			{
 				var fading:Boolean = false;
 				//If any tiles are still fading, the 'fading' boolean will be set to true
-				for (var index:int = 0; index < length; index++)
+				var n:int = length;
+				for (var i:int = 0; i < n; i++)
 				{
-					if (members[index].fade == true)
+					if (members[i].fade == true)
 						fading = true;
 				}
 				
@@ -168,11 +162,12 @@ package
 				{
 					if (doneBoard[row + 1][col + 1] > -1)
 					{
-						//tileAt(col, row).alpha = 0.5;
 						if (initialBoardCheck)
 							tileAt(col, row).randomizeNoCheck();
 						else
+						{
 							tileAt(col, row).fadeOut();
+						}
 						match++;
 					}
 					else
@@ -232,14 +227,13 @@ package
 			
 			//Check all surrounding tiles
 			if (row - 1 >= 0 && (type == tileAt(col, row - 1).type || tileAt(col, row - 1).type == BULLET))
-			checkChain(row - 1, col, type);
+				checkChain(row - 1, col, type);
 			if (col - 1 >= 0 && (type == tileAt(col - 1, row).type || tileAt(col - 1, row).type == BULLET))
 			checkChain(row, col - 1, type);
 			if (row + 1 < rows && (type == tileAt(col, row + 1).type || tileAt(col, row + 1).type == BULLET))
 			checkChain(row + 1, col, type);
 			if (col + 1 < columns && (type == tileAt(col + 1, row).type || tileAt(col + 1, row).type == BULLET))
 			checkChain(row, col + 1, type);
-				
 		}
 		
 		/**

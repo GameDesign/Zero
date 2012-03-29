@@ -38,26 +38,26 @@ package
 		{
 			elapsedTime = 0;
 			spawnTime = 5;
-			// start timer for zombie spawn delay
-			timer = new FlxDelay(zomebieSpawnDelay);
-			timer.start();
 			
 			chef = new Chef();
 			pause = new Pause();
 			zombies = new FlxGroup();
 			dishs = new FlxGroup();
 			
-			score = new FlxText(0, 2, FlxG.width, "0");
-			score.alignment = "center";
-			score.size = 16;
-			add(score);
-			
 			// background image
 			add(new FlxSprite(0, 0, null).loadGraphic(ImgBG, false, false, 320, 480)); 
+			
+			score = new FlxText(0, 0, FlxG.width);
+			score.alignment = "center";
+			score.shadow = 0xFF000000;
+			score.size = 21;
+			add(score);
+			
 			// Home button
-			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 30, 30));
+			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 32, 32));
 			// Pause button
-			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 30, 30));
+			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 32, 32));
+			
 			add(new FlxButton(FlxG.width - 91, FlxG.height - 131, null, throwDishChefClick).loadGraphic(ImgChefButton, false, false, 91, 91));
 			// start with first zombie
 			zombies.add(new Zombie(zombieSpeedScalar));
@@ -70,6 +70,10 @@ package
 			add(board);
 			// this would need to be called after swaps and and replacing tiles
 			board.checkBoard();
+			
+			// start timer for zombie spawn delay
+			timer = new FlxDelay(zomebieSpawnDelay);
+			timer.start();
 			
 			FlxG.flash(0xFF000000, 1);
 			FlxG.mouse.show();

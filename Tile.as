@@ -38,8 +38,8 @@ package
 			
 			onUp = toggle;
 			
-			x = column * width;
-			y = row * height - FlxG.height;
+			x = column * (width + 2);
+			y = row * (height + 2) - FlxG.height;
 			
 			// flagged for removal
 			fade = false;
@@ -113,7 +113,7 @@ package
 			if (on)
 				frame = PRESSED;
 			
-			var location:FlxPoint = new FlxPoint(column * width, row * height + FlxG.height / 15);
+			var location:FlxPoint = new FlxPoint(column * (width + 2), row * (height + 2) + FlxG.height / 15);
 			
 			if (x != location.x || y != location.y)
 			{
