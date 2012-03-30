@@ -157,7 +157,7 @@ spawnTime = FlxG.random() * TIME_SEED;
 				throwDish();
 			}
 
-			score.text = "$" + board.getScore().toString() + " Bullets:" + board.getBullets().toString(); //use this score to update the actual score at the top of the screen.
+			score.text = "$" + FlxG.score.toString() + " Bullets:" + board.getBullets().toString(); //use this score to update the actual score at the top of the screen.
 		}
 		
 		public function gameOver(Object1:FlxObject, Object2:FlxObject):void

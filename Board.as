@@ -16,7 +16,6 @@ package
 		
 		private var matches:int = 0;
 		private var initialBoardCheck:int = 1;
-		public var score:int = 0;
 		private var bowl:int = -1;
 		private var bullets:int = 0;
 		private var maxBullets:int = 3;
@@ -77,10 +76,10 @@ package
 				replace(tile, adjacent);
 			}
 			
-			var scoreBefore:int = score;
+			var scoreBefore:int = FlxG.score;
 			checkBoard();
 			
-			if (scoreBefore < score)
+			if (scoreBefore < FlxG.score)
 				bowl = 1;
 		}
 		
@@ -112,7 +111,7 @@ package
 			{
 				while (checkForChains()) { } //loops until first board has no chains
 				initialBoardCheck = 0;
-				score = 0;
+				FlxG.score = 0;
 				bullets = 0;
 			}
 			//Called once a swap has been made, or new tiles have been randomized on the board
@@ -273,11 +272,11 @@ package
 		public function calcScore(chainLength:int):void
 		{
 			var tempScore:int = chainLength;
-			score += 4;
+			FlxG.score += 4;
 			tempScore -= 4;
 			while (tempScore > 0)
 			{
-				score += 2;
+				FlxG.score += 2;
 				tempScore--;
 			}
 			
@@ -298,15 +297,6 @@ package
 			//If no bowl is lined up, return -1;
 			else
 				return -1;
-		}
-		
-		/**
-		 * Function to get score
-		 * @return score
-		 */
-		public function getScore():int
-		{
-			return score;
 		}
 		
 		public function shootBullet():void
