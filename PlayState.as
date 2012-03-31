@@ -162,7 +162,7 @@ spawnTime = FlxG.random() * TIME_SEED;
 		
 		public function gameOver(Object1:FlxObject, Object2:FlxObject):void
 		{
-			FlxG.switchState(new MenuState());
+			FlxG.switchState(new Death());
 		}
 		
 		public function goToMain():void
