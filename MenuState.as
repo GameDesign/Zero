@@ -6,16 +6,20 @@ package {
 		[Embed(source="data/brainz.png")] public static var ImgZombie:Class;
 		[Embed(source="data/title.png")] public static var ImgTitle:Class;
 		
+		public var background:FlxSprite;
 		public var text:FlxText;
 		public var zombie:FlxSprite;
 		 
 		override public function create():void
 		{
-			add(new FlxSprite(0, 0, ImgTitle));
+			background = new FlxSprite();
+			background.loadGraphic(ImgTitle, true, false, 320, 480);
+			background.addAnimation("flicker", [0, 1], 1, true);
+			add(background);
 			
 			zombie = new FlxSprite(0, FlxG.height, ImgZombie);
 			zombie.velocity.x = 50;
-			zombie.x -= zombie.width;
+			zombie.x -= zombie.width * 2;
 			zombie.y -= zombie.height;
 			add(zombie);
 			
@@ -33,8 +37,10 @@ package {
 		{
 			super.update();
 			
+			background.play("flicker");
+			
 			if (zombie.x > FlxG.width)
-				zombie.x = -zombie.width;
+				zombie.x = -zombie.width * 2;
 			
 			if (FlxG.mouse.justPressed())
 			{
