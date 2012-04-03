@@ -23,7 +23,7 @@ package
 			crawl.velocity.y = -11;
 			add(crawl);
 			
-			FlxG.flash(0xFF000000, 5);
+			FlxG.flash(0xFF660000, 2);
 			FlxG.mouse.show();
 		}
 		
