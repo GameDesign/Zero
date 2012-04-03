@@ -4,12 +4,15 @@ package
 	
 	public class StoryState extends FlxState
 	{
-		
+		[Embed(source = "data/blood.png")] private static var ImgBlood:Class;	
 		public var crawl:FlxText;
 		public var text:FlxText;
 		
 		override public function create():void
 		{
+			// bloody image
+			add(new FlxSprite(0, 0, null).loadGraphic(ImgBlood, false, false, 320, 480)); 
+			
 			text = new FlxText(0, 0, FlxG.width, "Click to Skip");
 			text.alignment = "center";
 			text.size = 12;
@@ -38,7 +41,7 @@ package
 		
 		public function skip():void
 		{
-			FlxG.mouse.hide();
+			//FlxG.mouse.hide();
 			FlxG.switchState(new PlayState());
 		}
 	}

@@ -16,7 +16,6 @@ package
 		
 		private var matches:int = 0;
 		private var initialBoardCheck:int = 1;
-		public var score:int = 0;
 		private var bowl:int = -1;
 		private var bullets:int = 0;
 		private var maxBullets:int = 3;
@@ -30,14 +29,12 @@ package
 			for (var row:int = 0; row < BOARD_SIZE_BORDER; row++)
 			{
 				//Create the second dimensions for each array
-				//board[row] = new Array(BOARD_SIZE_BORDER);
 				doneBoard[row] = new Array(BOARD_SIZE_BORDER);
 				tempBoard[row] = new Array(BOARD_SIZE_BORDER);
 				
 				//Initialize each array
 				for (var col:int = 0; col < BOARD_SIZE_BORDER; col++)
 				{
-					//board[row][col] = CLEAR_BOARD;
 					doneBoard[row][col] = CLEAR_BOARD;
 					tempBoard[row][col] = CLEAR_BOARD;
 				}
@@ -79,19 +76,15 @@ package
 				replace(tile, adjacent);
 			}
 			
-			var scoreBefore:int = score;
+			var scoreBefore:int = FlxG.score;
 			checkBoard();
-			if (scoreBefore < score)
+			
+			if (scoreBefore < FlxG.score)
 				bowl = 1;
 		}
 		
 		public function tileAt(column:int, row:int):Tile
 		{
-			/*
-			 members is a one dimensional array within the FlxGroup
-			 to find a tile at (3,3) would be at index 24 in the array
-			 (0,0) is 0 and (6,6) is 48
-			 */
 			//return tiles.members[(row + 1) * rows - (columns - (column))];
 			
 			for each (var tile:Tile in members)
@@ -118,7 +111,7 @@ package
 			{
 				while (checkForChains()) { } //loops until first board has no chains
 				initialBoardCheck = 0;
-				score = 0;
+				FlxG.score = 0;
 				bullets = 0;
 			}
 			//Called once a swap has been made, or new tiles have been randomized on the board
@@ -126,14 +119,15 @@ package
 			{
 				var fading:Boolean = false;
 				//If any tiles are still fading, the 'fading' boolean will be set to true
-				for (var index:int = 0; index < length; index++)
+				var n:int = length;
+				for (var i:int = 0; i < n; i++)
 				{
-					if (members[index].fade == true)
+					if (members[i].fade == true)
 						fading = true;
 				}
 				
 				//Prevents chain checking when tiles are fading
-				if(!fading)
+				if (!fading)
 					checkForChains();
 			}
 		}
@@ -159,7 +153,7 @@ package
 			}
 			
 			var match:int = 0;
-
+			
 			//This pass goes through the done board and does something to each tile which contains
 			//a chain
 			for (row = 0; row < rows; row++)
@@ -168,11 +162,12 @@ package
 				{
 					if (doneBoard[row + 1][col + 1] > -1)
 					{
-						//tileAt(col, row).alpha = 0.5;
 						if (initialBoardCheck)
 							tileAt(col, row).randomizeNoCheck();
 						else
+						{
 							tileAt(col, row).fadeOut();
+						}
 						match++;
 					}
 					else
@@ -232,14 +227,13 @@ package
 			
 			//Check all surrounding tiles
 			if (row - 1 >= 0 && (type == tileAt(col, row - 1).type || tileAt(col, row - 1).type == BULLET))
-			checkChain(row - 1, col, type);
+				checkChain(row - 1, col, type);
 			if (col - 1 >= 0 && (type == tileAt(col - 1, row).type || tileAt(col - 1, row).type == BULLET))
-			checkChain(row, col - 1, type);
+				checkChain(row, col - 1, type);
 			if (row + 1 < rows && (type == tileAt(col, row + 1).type || tileAt(col, row + 1).type == BULLET))
-			checkChain(row + 1, col, type);
+				checkChain(row + 1, col, type);
 			if (col + 1 < columns && (type == tileAt(col + 1, row).type || tileAt(col + 1, row).type == BULLET))
-			checkChain(row, col + 1, type);
-				
+				checkChain(row, col + 1, type);
 		}
 		
 		/**
@@ -263,9 +257,13 @@ package
 		 */
 		private function clearBoard(clearBoard:Array):void
 		{
-			for (var row:int = 1; row < 8; row++)
-				for (var col:int = 1; col < 8; col++)
-					clearBoard[row][col] = CLEAR_BOARD;
+			var n:int = 8;
+			for (var i:int = 1; i < n; i++)
+			{
+				var m:int = 8;
+				for (var j:int = 1; j < m; j++)
+					clearBoard[i][j] = CLEAR_BOARD;
+			}
 		}
 		
 		/**
@@ -274,11 +272,11 @@ package
 		public function calcScore(chainLength:int):void
 		{
 			var tempScore:int = chainLength;
-			score += 4;
+			FlxG.score += 4;
 			tempScore -= 4;
 			while (tempScore > 0)
 			{
-				score += 2;
+				FlxG.score += 2;
 				tempScore--;
 			}
 			
@@ -289,24 +287,16 @@ package
 		 */
 		public function checkBowl():int 
 		{
-				//If a bowl is lined up, return it
-				if (bowl >= 0)
-				{
-					var temp:int = bowl;
-					bowl = -1;
-					return temp;
-				}
-				//If no bowl is lined up, return -1;
-				else
-					return -1;
-		}
-		
-		/**
-		 * Function to get score
-		 */
-		public function getScore():int
-		{
-			return score;
+			//If a bowl is lined up, return it
+			if (bowl >= 0)
+			{
+				var temp:int = bowl;
+				bowl = -1;
+				return temp;
+			}
+			//If no bowl is lined up, return -1;
+			else
+				return -1;
 		}
 		
 		public function shootBullet():void
@@ -316,7 +306,7 @@ package
 		
 		public function addBullet():void
 		{
-			if(bullets < maxBullets)
+			if (bullets < maxBullets)
 				bullets++;
 		}
 		

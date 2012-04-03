@@ -5,13 +5,15 @@ package {
 	{
 		[Embed(source="data/brainz.png")] public static var ImgZombie:Class;
 		[Embed(source="data/title.png")] public static var ImgTitle:Class;
+		[Embed(source="data/titlescreen.png")] public static var ImgTitleScreen:Class;
 		
 		public var text:FlxText;
 		public var zombie:FlxSprite;
 		 
 		override public function create():void
 		{
-			add(new FlxSprite(0, 0, ImgTitle));
+			add(new FlxSprite(0, 0, ImgTitleScreen));
+			//add(new FlxSprite(0, 0, ImgTitle));
 			
 			zombie = new FlxSprite(0, FlxG.height, ImgZombie);
 			zombie.velocity.x = 50;

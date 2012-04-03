@@ -5,27 +5,19 @@ package
 	public class Pause extends FlxGroup
 	{
 		[Embed(source = "data/pause_bg.png")] private static var PauseIMG:Class;
-		
-		public var pause:FlxButton;
-		public var mute:FlxButton;
-		public var louder:FlxButton;
-		public var quieter:FlxButton;
+		[Embed(source = "data/pause.png")] private static var ClearIMG:Class;
 		
 		public function Pause()
 		{
 			super();
-			
-			pause = new FlxButton(50, 50, "Pause", doSomething);
-			mute = new FlxButton(50, 100, "Mute", muteSound);
-			louder = new FlxButton(50, 150, "+", doSomething);
-			quieter = new FlxButton(50, 200, "-", doSomething);
-		
+
 			// Loads a graphic of a pause menu
 			add(new FlxSprite(0, 0, PauseIMG));
-			add(pause);
-			add(mute);
-			add(louder);
-			add(quieter);
+			add(new FlxButton(55, 180, null, doSomething).loadGraphic(ClearIMG, false, false));
+			add(new FlxButton(55, 220, null, muteSound).loadGraphic(ClearIMG, false, false));
+			add(new FlxButton(55, 260, null, louderSound).loadGraphic(ClearIMG, false, false));
+			add(new FlxButton(55, 305, null, quieterSound).loadGraphic(ClearIMG, false, false));
+			
 		}
 		
 		private function muteSound():void
@@ -43,6 +35,16 @@ package
 		override public function update():void
 		{
 			super.update();
+		}
+		
+		private function louderSound()
+		{
+			FlxG.volume = FlxG.volume + 0.1;
+		}
+		
+		private function quieterSound()
+		{
+			FlxG.volume = FlxG.volume - 0.1;
 		}
 	}
 }
