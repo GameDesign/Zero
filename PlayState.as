@@ -10,6 +10,7 @@ package
 		[Embed(source = "data/music.mp3")] private static var SndMusic:Class;
 		[Embed(source = "data/invisChef.png")] private static var ImgChefButton:Class;
 		[Embed(source = "data/bg.png")] private static var ImgBG:Class;		
+		[Embed(source = "data/bulletCount.png")] private static var ImgBullet:Class;
 		
 		private static var COLUMNS:uint = 7;
 		private static var ROWS:uint = 7;
@@ -19,6 +20,7 @@ package
 		public var dishs:FlxGroup;
 		public var pause:Pause;
 		public var score:FlxText;
+		public var bulletDisplay:FlxText;
 		public var zombies:FlxGroup;
 		public var timer:FlxDelay;
 		public var zomebieSpawnDelay:int = 5000;	// time in MS for how long to delay zombie spawning	
@@ -46,20 +48,24 @@ package
 			pause = new Pause();
 			zombies = new FlxGroup();
 			dishs = new FlxGroup();
-			
-			// background image
-			add(new FlxSprite(0, 0, null).loadGraphic(ImgBG, false, false, 320, 480)); 
-			
+						
 			score = new FlxText(0, 0, FlxG.width);
 			score.alignment = "center";
 			score.shadow = 0xFF000000;
 			score.size = 21;
 			add(score);
+			
+			bulletDisplay = new FlxText(0, 458, FlxG.width);
+			bulletDisplay.alignment = "right";
+			bulletDisplay.size = 18;
+			add(bulletDisplay);
 			 
 			// Home button
 			add(new FlxButton(0, 0, "", goToMain).loadGraphic(ImgHome, true, false, 32, 32));
 			// Pause button
 			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 32, 32));
+			// ammo counter image
+			add(new FlxSprite(256, 458, ImgBullet));
 			
 			add(new FlxButton(FlxG.width - 91, FlxG.height - 131, null, throwDishChefClick).loadGraphic(ImgChefButton, false, false, 91, 91));
 			// start with first zombie
@@ -160,7 +166,11 @@ spawnTime = FlxG.random() * TIME_SEED;
 				throwDish();
 			}
 
-			score.text = "$" + FlxG.score.toString() + " Bullets:" + board.getBullets().toString(); //use this score to update the actual score at the top of the screen.
+			score.text = "$" + FlxG.score.toString(); //use this score to update the actual score at the top of the screen.
+			if (board.getBullets() < 10)
+				bulletDisplay.text = "x0" + board.getBullets().toString()
+			else
+				bulletDisplay.text = "x" + board.getBullets().toString()
 		}
 		
 		public function gameOver(Object1:FlxObject, Object2:FlxObject):void

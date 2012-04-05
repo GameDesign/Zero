@@ -112,7 +112,7 @@ package
 				while (checkForChains()) { } //loops until first board has no chains
 				initialBoardCheck = 0;
 				FlxG.score = 0;
-				bullets = 0;
+				bullets = 1;
 			}
 			//Called once a swap has been made, or new tiles have been randomized on the board
 			else
@@ -272,11 +272,11 @@ package
 		public function calcScore(chainLength:int):void
 		{
 			var tempScore:int = chainLength;
-			FlxG.score += 4;
+			FlxG.score += 40;
 			tempScore -= 4;
 			while (tempScore > 0)
 			{
-				FlxG.score += 2;
+				FlxG.score += 25;
 				tempScore--;
 			}
 			
