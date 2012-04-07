@@ -14,19 +14,19 @@ package
 		public function Pause()
 		{
 			super();
-
 			
-			pause = new FlxButton(50, 50, "Pause", doSomething);
-			mute = new FlxButton(50, 100, "Mute", muteSound);
-			louder = new FlxButton(50, 150, "+", doSomething);
-			quieter = new FlxButton(50, 200, "-", doSomething);
-		
+//			pause = new FlxButton(50, 50, "Pause", doSomething);
+//			mute = new FlxButton(50, 100, "Mute", muteSound);
+//			louder = new FlxButton(50, 150, "+", doSomething);
+//			quieter = new FlxButton(50, 200, "-", doSomething);
+//		
 			// Loads a graphic of a pause menu
 			add(new FlxSprite(0, 0, PauseIMG));
-			add(new FlxButton(55, 180, null, doSomething).loadGraphic(ClearIMG, false, false));
-			add(new FlxButton(55, 220, null, muteSound).loadGraphic(ClearIMG, false, false));
-			add(new FlxButton(55, 260, null, louderSound).loadGraphic(ClearIMG, false, false));
-			add(new FlxButton(55, 305, null, quieterSound).loadGraphic(ClearIMG, false, false));
+			
+//			add(new FlxButton(55, 180, null, doSomething).loadGraphic(ClearIMG, false, false));
+//			add(new FlxButton(55, 220, null, muteSound).loadGraphic(ClearIMG, false, false));
+//			add(new FlxButton(55, 260, null, louderSound).loadGraphic(ClearIMG, false, false));
+//			add(new FlxButton(55, 305, null, quieterSound).loadGraphic(ClearIMG, false, false));
 			
 		}
 		
@@ -34,7 +34,6 @@ package
 		{
 			FlxG.mute = !FlxG.mute;
 			FlxG.log("Mute");
-			FlxG.paused = true;
 		}
 		
 		public function doSomething():void
@@ -42,19 +41,19 @@ package
 			FlxG.log("Something");
 		}
 		
-		override public function update():void
-		{
-			super.update();
-		}
-		
-		private function louderSound()
+		private function louderSound():void
 		{
 			FlxG.volume = FlxG.volume + 0.1;
 		}
 		
-		private function quieterSound()
+		private function quieterSound():void
 		{
 			FlxG.volume = FlxG.volume - 0.1;
+		}
+		
+		override public function update():void
+		{
+			super.update();
 		}
 	}
 }

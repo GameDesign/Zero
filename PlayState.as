@@ -39,10 +39,6 @@ package
 			elapsedTime = 0;
 			spawnTime = 5;
 			
-			// background image
-			add(new FlxSprite(0, 0, null).loadGraphic(ImgBG, false, false, 320, 480));
-			
-			chef = new Chef();
 			pause = new Pause();
 			zombies = new FlxGroup();
 			dishs = new FlxGroup();
@@ -62,21 +58,28 @@ package
 			add(new FlxButton(FlxG.width - 30, 0, null, pauseGame).loadGraphic(ImgPause, true, false, 32, 32));
 			
 			add(new FlxButton(FlxG.width - 91, FlxG.height - 131, null, throwDishChefClick).loadGraphic(ImgChefButton, false, false, 91, 91));
-			// start with first zombie
-			zombies.add(new Zombie(zombieSpeedScalar));
-			// add all objects to the game
-			add(dishs);
-			add(zombies);
-			add(chef);
 			
 			board = new Board(COLUMNS, ROWS);
 			add(board);
 			// this would need to be called after swaps and and replacing tiles
 			board.checkBoard();
 			
+			chef = new Chef();
+			add(chef);
+			
+			// start with first zombie
+			zombies.add(new Zombie(zombieSpeedScalar));
+			// add all objects to the game
+			add(dishs);
+			add(zombies);
+			
 			// start timer for zombie spawn delay
 			timer = new FlxDelay(zomebieSpawnDelay);
 			timer.start();
+			
+			pause.alive = false;
+			pause.exists = false;
+			add(pause);
 			
 			FlxG.flash(0xFF000000, 1);
 			FlxG.mouse.show();
@@ -88,15 +91,11 @@ package
 			if (!FlxG.paused)
 			{
 				FlxG.paused = true;
-				
-				add(pause);
-				//super.update(); //in order for buttons to work
 				pause.revive();
 			}
 			else
 			{
 				FlxG.paused = false;
-				remove(pause);
 				pause.alive = false;
 				pause.exists = false;
 			}
@@ -104,19 +103,10 @@ package
 		
 		override public function update():void
 		{
-			if (!FlxG.paused)
-			{
-				super.update();
-			}
-			else
-			{
+			if (FlxG.paused)
 				pause.update();
-			}
-			
-			if (FlxG.keys.justPressed("P"))
-			{
-				pauseGame();
-			}
+			else
+				super.update();
 			
 			// check collisions
 			FlxG.collide(zombies, chef, gameOver);
