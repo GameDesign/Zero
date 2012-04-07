@@ -18,7 +18,7 @@ package
 		private var initialBoardCheck:int = 1;
 		private var bowl:int = -1;
 		private var bullets:int = 0;
-		private var maxBullets:int = 3;
+		public var maxBullets:int = 3;
 		
 		public function Board(Columns:uint, Rows:uint) 
 		{

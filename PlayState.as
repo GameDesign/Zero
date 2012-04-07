@@ -176,10 +176,15 @@ spawnTime = FlxG.random() * TIME_SEED;
 			}
 
 			score.text = FlxG.score.toString(); //use this score to update the actual score at the top of the screen.
+			
 			if (board.getBullets() < 10)
 				bulletDisplay.text = "x0" + board.getBullets().toString()
 			else
 				bulletDisplay.text = "x" + board.getBullets().toString()
+			if (board.getBullets() == board.maxBullets)
+				bulletDisplay.color = new uint("0x00FF00");
+			else
+				bulletDisplay.color = new uint("0xFFFFFF");
 		}
 		
 		public function gameOver(Object1:FlxObject, Object2:FlxObject):void
