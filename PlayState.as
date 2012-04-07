@@ -47,6 +47,9 @@ package
 			zombies = new FlxGroup();
 			dishs = new FlxGroup();
 			bullet = new FlxGroup();
+			
+			// Background Image
+			add(new FlxSprite(0, 0, ImgBG));
 						
 			score = new FlxText(0, 0, FlxG.width);
 			score.alignment = "center";
@@ -67,16 +70,9 @@ package
 			add(new FlxSprite(256, 458, ImgBullet));
 			
 			add(new FlxButton(FlxG.width - 91, FlxG.height - 131, null, throwDishChefClick).loadGraphic(ImgChefButton, false, false, 91, 91));
-<<<<<<< HEAD
-=======
-			// start with first zombie
-			zombies.add(new Zombie(zombieSpeedScalar));
-			// add all objects to the game
+
 			add(dishs);
-			add(zombies);
-			add(chef);
 			add(bullet);
->>>>>>> 97516d3d6cabf7708c07f2323d4eff58dbf28fd7
 			
 			board = new Board(COLUMNS, ROWS);
 			add(board);
@@ -122,17 +118,7 @@ package
 		
 		override public function update():void
 		{
-<<<<<<< HEAD
 			if (FlxG.paused)
-=======
-			FlxG.watch(this, "elapsedTime");
-			if (!FlxG.paused)
-			{
-				super.update();
-			}
-			else
-			{
->>>>>>> 97516d3d6cabf7708c07f2323d4eff58dbf28fd7
 				pause.update();
 			else
 				super.update();
