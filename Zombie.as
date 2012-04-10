@@ -16,7 +16,7 @@ package
 			
 			// Loads a graphic of a zombie
 			loadGraphic(ImgZombie, true, true, 71, 105);
-			
+			facing = RIGHT;
 			addAnimation("walk", [0, 1, 2, 3, 4, 5, 6], 4, true);
 // Choose a random speed using the scalar
 //speed = Math.random() * 5 + speedScalar;
@@ -27,6 +27,17 @@ package
 			y = FlxG.height - height;
 			width = 41;
 			
+		}
+		
+		public function WalkAway()
+		{
+			speed = -100;
+			facing = LEFT;
+		}
+		
+		public function GetShot()
+		{
+			this.kill();
 		}
 		
 		override public function update():void 

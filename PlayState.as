@@ -199,13 +199,14 @@ spawnTime = FlxG.random() * TIME_SEED;
 		public function hitZombieWithDish(Object1:FlxObject, Object2:FlxObject):void
 		{
 			Object1.kill();
-			Object2.kill();
+			//Object2.kill();
+			(Object2 as Zombie).WalkAway();
 		}
 		
 		public function hitZombieWithBullet(Object1:FlxObject, Object2:FlxObject):void
 		{
 			Object1.kill();
-			Object2.kill();
+			(Object2 as Zombie).GetShot();
 		}
 		public function throwDishChefClick()
 		{
