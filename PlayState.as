@@ -8,7 +8,7 @@ package
 	{
 		[Embed(source="data/home.png")] private static var ImgHome:Class;
 		[Embed(source="data/pause.png")] private static var ImgPause:Class;
-		[Embed(source = "data/music.mp3")] private static var SndMusic:Class;
+		[Embed(source = "data/LLS - Flesh And Steel.mp3")] private static var SndMusic:Class;
 		[Embed(source = "data/invisChef.png")] private static var ImgChefButton:Class;
 		[Embed(source = "data/bg.png")] private static var ImgBG:Class;		
 		[Embed(source = "data/bulletCount.png")] private static var ImgBullet:Class;
