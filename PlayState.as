@@ -98,7 +98,7 @@ package
 			
 			FlxG.flash(0xFF000000, 1);
 			FlxG.mouse.show();
-			FlxG.play(SndMusic);
+			FlxG.playMusic(SndMusic);
 		}
 		
 		public function pauseGame():void
