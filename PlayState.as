@@ -165,7 +165,8 @@ spawnTime = FlxG.random() * TIME_SEED;
 			if (board.checkBowl() > -1)
 			{
 				// do animation and throw dish if chain is made
-				Chef.chopping = true;
+				//Chef.chopping = true;
+				chef.chop();
 				throwDish();
 			}
 

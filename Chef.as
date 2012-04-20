@@ -22,12 +22,17 @@ package
 		override public function update():void
 		{
 			// do animations here
-			if (chopping)
+			/*if (chopping)
 			{
 				play("chop");
 				chopping = false;
-			}
+			}*/
 			super.update();
+		}
+		
+		public function chop(): void
+		{
+			play("chop");
 		}
 		
 		
